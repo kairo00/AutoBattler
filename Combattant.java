@@ -57,4 +57,8 @@ public abstract class Combattant {
         return id;
     }
 
+    public boolean isAlive() {
+        return pv != 0;
+    }
+
 }
