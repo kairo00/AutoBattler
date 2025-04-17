@@ -1,3 +1,5 @@
+
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +16,7 @@ public class Equipe {
      *  🚧 A voir avec attack() si de retourner un combattant c'est ce qu'il y a de mieux
      *  Choisi un combattant au hasard de SON équipe, ce combattant est retourné.
      */
-    public Combattant choisirCombattantVivant() {
+    public Combattant cible() {
         int randomIndex;
         do {
             randomIndex = (int) (Math.random()*team.size());
