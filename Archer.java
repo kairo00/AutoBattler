@@ -8,10 +8,10 @@ public class Archer extends Combattant {
 
     void attack(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantFaible();
-        adversaire.damage(getAtk() - adversaire.getDef());
+        adversaire.damage(getAtk() - adversaire.getDef(), this);
 
         if(getAtk() < adversaire.getDef()) {
-            adversaire.damage(0);
+            adversaire.damage(0, this);
         }
     }
 
