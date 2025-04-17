@@ -8,7 +8,7 @@ public class Mage extends Combattant {
 
     @Override
     void attack(Equipe ennemis) {
-        Combattant adversaire = ennemis.cible();
-        adversaire.damage(getAtk());
+        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        adversaire.damage(getAtk(), this);
     }
 }

@@ -3,7 +3,6 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Equipe {
     private List<Combattant> team;
@@ -16,7 +15,7 @@ public class Equipe {
      *  🚧 A voir avec attack() si de retourner un combattant c'est ce qu'il y a de mieux
      *  Choisi un combattant au hasard de SON équipe, ce combattant est retourné.
      */
-    public Combattant cible() {
+    public Combattant choisirCombattantAleatoire() {
         int randomIndex;
         do {
             randomIndex = (int) (Math.random()*team.size());
