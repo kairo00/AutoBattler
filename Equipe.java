@@ -9,7 +9,15 @@ public class Equipe {
     private List<Combattant> team;
 
     public Equipe() {
-        this.team = new ArrayList<>();
+        this.team = new ArrayList<Combattant>();
+    }
+
+    public void Add(Combattant combattant){
+        team.add(combattant);
+    }
+
+    public String show(int i) {
+        return team.get(i).toString();
     }
 
     /*
