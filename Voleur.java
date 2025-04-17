@@ -1,7 +1,4 @@
-import ProjetCombat.Combattant;
-
-public class Voleur {
-    public class Voleur extends Combattant{
+public class Voleur extends Combattant{
     Voleur() {
         super(145, 45, 20, 40);
     }
@@ -15,5 +12,4 @@ public class Voleur {
         }
         return false;
     }
-}
 }

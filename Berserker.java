@@ -1,3 +1,5 @@
+
+
 public class Berserker extends Combattant{
    
     Berserker() {
