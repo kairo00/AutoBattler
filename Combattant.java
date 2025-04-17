@@ -1,12 +1,12 @@
-
-
 public abstract class Combattant {
+
     static int compteur = 20;
     private int pv;
     private int attaque;
     private int defense;
     private int vitesse;
     private int id;
+    private Combattant cible;
 
     Combattant(int pv, int attaque, int defense, int vitesse){
         this.pv = pv;
@@ -15,22 +15,27 @@ public abstract class Combattant {
         this.vitesse = vitesse;
     }
 
+    public void cible(Equipe equipe) {
+        cible =  equipe.choisirCombattantAleatoire();
+    }
 
     void attack(Equipe ennemis) {
-        Combattant adversaire = ennemis.cible();
-        adversaire.damage(getAtk() - adversaire.getDef());
+        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        adversaire.damage(getAtk() - adversaire.getDef(), this);
 
         if(getAtk() < adversaire.getDef()) {
-            adversaire.damage(0);
+            adversaire.damage(0, this);
         }
     }
 
-    void damage(int damage) {
+    void damage(int damage, Combattant attaquant) {
+
         if (esquive()) {
             damage = 0;
         }
         pv -= damage;
-        passive();
+        cible = attaquant;
+        passive(cible);
     }
 
     public void regenererPV(int pv) {
@@ -45,13 +50,15 @@ public abstract class Combattant {
         return false;
     }
 
-    public void passive() {
-
+    public void passive(Combattant cible) {
     }
-    
 
-
-
+    public boolean isAlive(){
+        if(pv <= 0) {
+            return false;
+        }
+        return true;
+    }
 
     public String toString(){
         return "Combattant";
@@ -75,5 +82,9 @@ public abstract class Combattant {
 
     int getId() {
         return id;
+    }
+
+    Combattant getCible() {
+        return cible;
     }
 }

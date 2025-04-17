@@ -9,11 +9,11 @@ public class Berserker extends Combattant{
     @Override
     void attack(Equipe ennemis) {
         int pv = getPV();
-        Combattant adversaire = ennemis.cible();
-        adversaire.damage(getAtk() - adversaire.getDef());
+        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        adversaire.damage(getAtk() - adversaire.getDef(), this);
 
         if(getAtk() < adversaire.getDef()) {
-            adversaire.damage(0);
+            adversaire.damage(0, this);
         }
 
         if(pv <= 80) {
