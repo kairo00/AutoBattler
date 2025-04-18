@@ -7,12 +7,14 @@ public abstract class Combattant {
     private int vitesse;
     private int id;
     private Combattant cible;
+    public static int cpt = 0;
 
     Combattant(int pv, int attaque, int defense, int vitesse){
         this.pv = pv;
         this.attaque = attaque;
         this.defense = defense;
         this.vitesse = vitesse;
+        cpt++;
     }
 
     public void cible(Equipe equipe) {
@@ -51,6 +53,7 @@ public abstract class Combattant {
     }
 
     public void passive(Combattant cible) {
+
     }
 
     public boolean isAlive(){
@@ -87,4 +90,6 @@ public abstract class Combattant {
     Combattant getCible() {
         return cible;
     }
+
+    public abstract String getNom();
 }

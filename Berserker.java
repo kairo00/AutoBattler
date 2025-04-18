@@ -20,4 +20,13 @@ public class Berserker extends Combattant{
             attack(ennemis);
         }
     }
+
+    @Override
+    public String toString() {
+        return "B["+getPV()+"/220]";
+    }
+
+    public String getNom() {
+        return "Berseker";
+    }
 }

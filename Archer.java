@@ -15,4 +15,12 @@ public class Archer extends Combattant {
         }
     }
 
+    @Override
+    public String toString() {
+        return "A["+getPV()+"/170]";
+    }
+
+    public String getNom() {
+        return "Archer";
+    }
 }
