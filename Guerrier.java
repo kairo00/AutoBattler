@@ -14,6 +14,7 @@ public class Guerrier extends Combattant{
                 cible.damage(0, this);
             }
         }
+
     }
 
     @Override
