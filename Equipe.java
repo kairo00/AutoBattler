@@ -33,4 +33,17 @@ public class Equipe {
         Collections.sort(team, new ComparatorVie());
         return team.get(0);
     }
+
+    public boolean loose() {
+        int somme = 0;
+        for(Combattant c : team) {
+            if(c.isAlive()) {
+                somme += c.getPV();
+            }
+        }
+        if (somme <= 0) {
+            return true;
+        }
+        return false;
+    }
 }
