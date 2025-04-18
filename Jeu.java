@@ -2,26 +2,25 @@ import java.util.*;
 
 public class Jeu {
 
-    public static void choixCombattant(Equipe equipe) {
+    public static void choixCombattant(Equipe equipe, Scanner scanner) {
         int nbCombattant;
         Combattant [] typeCombattant = {new Paladin(), new Berserker(), new Mage(), new Archer(), new Voleur(), new Guerrier()};
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Choix des combattants :");
+        System.out.println("\nChoix des combattants pour l'équipe "+equipe.getID()+" :");
         for(Combattant c : typeCombattant) {
-            System.out.println("Nombre de "+c.toString()+":");
+            System.out.println("Nombre de "+c.getNom()+":");
             nbCombattant = scanner.nextInt();
             for(int i = 0; i<nbCombattant;i++) {
-                equipe.Add(c);
+                equipe.getTeam().add(c);
             }
         }
-        
 
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Equipe equipe1 = new Equipe();
         Equipe equipe2 = new Equipe();
+        Combat arene = new Combat(equipe1, equipe2);
         /*
          *  Temporaire
          *  Espace de test pour nos méthodes.
@@ -54,8 +53,9 @@ public class Jeu {
                 /*
                  * 
                  */
-                choixCombattant(equipe1);
-                choixCombattant(equipe2);
+                choixCombattant(equipe1, scanner);
+                choixCombattant(equipe2, scanner);
+                arene.lancerCombat();
                 jeuLance = false;
             }
         }
