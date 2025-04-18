@@ -16,6 +16,11 @@ public class Paladin extends Combattant {
     }
 
     @Override
+    void attack(Equipe ennemis) {
+        super.attack(ennemis);
+    }
+
+    @Override
     public String toString() {
         return "P["+getPV()+"/200]";
     }

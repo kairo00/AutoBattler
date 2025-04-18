@@ -38,7 +38,7 @@ public class Equipe {
      */
     public Combattant choisirCombattantFaible() {
         Collections.sort(team, new ComparatorVie());
-        return team.get(0);
+        return team.get(team.size()-1);
     }
 
     public boolean aDesVivants() {

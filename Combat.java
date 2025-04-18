@@ -57,6 +57,9 @@ public class Combat {
     }
 
     public String resultatManche() {
+        Collections.sort(equipe_1.getTeam(), new ComparatorVitesse());
+        Collections.sort(equipe_2.getTeam(), new ComparatorVitesse());
+        
         String str = "";
         str += "======[Resulat de la manche "+ cpt_manche + "]======\nEquipe 1:\n";
         for(Combattant c : equipe_1.getTeam()) {

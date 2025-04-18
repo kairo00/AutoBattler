@@ -24,25 +24,24 @@ public abstract class Combattant {
 
     void attack(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
-        adversaire.damage(getAtk() - adversaire.getDef(), this);
-
-        if(getAtk() < adversaire.getDef()) {
-            adversaire.damage(0, this);
-        }
+        adversaire.damage(this);
     }
 
-    void damage(int damage, Combattant attaquant) {
-
-        if (esquive()) {
-            damage = 0;
+    void damage(Combattant attaquant) {
+        if (esquive() || (attaquant.getAtk() <= getDef())) {
+            return;
         }
-        pv -= damage;
-        cible = attaquant;
-        passive(cible);
+        int degat = attaquant.Degat(this);
+        if(degat > 0) pv = Math.max(0, pv - degat);
+        passive(attaquant);
+    }
+
+    public int Degat(Combattant cible) {
+        return getAtk() - cible.getDef();
     }
 
     public void regenererPV(int pv) {
-        this.pv += pv;
+        if(isAlive())this.pv += pv;
     }
 
     public boolean esquive() {
@@ -57,10 +56,10 @@ public abstract class Combattant {
     }
 
     public boolean isAlive(){
-        if(pv <= 0) {
-            return false;
+        if(pv > 0) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public String toString(){

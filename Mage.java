@@ -9,7 +9,14 @@ public class Mage extends Combattant {
     @Override
     void attack(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
-        adversaire.damage(getAtk(), this);
+        System.out.println(adversaire.getPV());
+        adversaire.damage(this);
+        System.out.println(adversaire.getNom()+" degat subit: "+getAtk()+" pv: "+adversaire.getPV()+"/200");
+    }
+
+    @Override
+    public int Degat(Combattant cible) {
+        return getAtk();
     }
 
     @Override
