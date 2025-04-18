@@ -4,17 +4,21 @@ public class Jeu {
 
     public static void choixCombattant(Equipe equipe, Scanner scanner) {
         int nbCombattant;
-        Combattant [] typeCombattant = {new Paladin(), new Berserker(), new Mage(), new Archer(), new Voleur(), new Guerrier()};
-
-        System.out.println("\nChoix des combattants pour l'équipe "+equipe.getID()+" :");
-        for(Combattant c : typeCombattant) {
-            System.out.println("Nombre de "+c.getNom()+":");
+        String[] combattants = {"Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"};
+        for (int i = 0; i < combattants.length; i++) {
+            System.out.println("Nombre de " + combattants[i] + " :");
             nbCombattant = scanner.nextInt();
-            for(int i = 0; i<nbCombattant;i++) {
-                equipe.getTeam().add(c);
+            for (int j = 0; j < nbCombattant; j++) {
+                switch (i) {
+                    case 0: equipe.getTeam().add(new Paladin()); break;
+                    case 1: equipe.getTeam().add(new Berserker()); break;
+                    case 2: equipe.getTeam().add(new Mage()); break;
+                    case 3: equipe.getTeam().add(new Archer()); break;
+                    case 4: equipe.getTeam().add(new Voleur()); break;
+                    case 5: equipe.getTeam().add(new Guerrier());
+                }
             }
         }
-
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
