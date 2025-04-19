@@ -8,16 +8,21 @@ public class Berserker extends Combattant{
 
     @Override
     void attack(Equipe ennemis) {
-        int pv = getPV();
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
-        adversaire.damage(getAtk() - adversaire.getDef(), this);
+        adversaire.damage(this);
 
-        if(getAtk() < adversaire.getDef()) {
-            adversaire.damage(0, this);
+        if(getPV() <= 80 && isAlive()) {
+            adversaire = ennemis.choisirCombattantAleatoire();
+            adversaire.damage(this);
         }
+    }
 
-        if(pv <= 80) {
-            attack(ennemis);
-        }
+    @Override
+    public String toString() {
+        return "B["+getPV()+"/220]";
+    }
+
+    public String getNom() {
+        return "Berseker";
     }
 }

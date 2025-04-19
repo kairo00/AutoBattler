@@ -14,4 +14,18 @@ public class Paladin extends Combattant {
             regenererPV(200-pv);
         }
     }
+
+    @Override
+    void attack(Equipe ennemis) {
+        super.attack(ennemis);
+    }
+
+    @Override
+    public String toString() {
+        return "P["+getPV()+"/200]";
+    }
+
+    public String getNom() {
+        return "Paladin";
+    }
 }

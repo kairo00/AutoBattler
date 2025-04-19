@@ -12,4 +12,13 @@ public class Voleur extends Combattant{
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "V["+getPV()+"/145]";
+    }
+
+    public String getNom() {
+        return "Voleur";
+    }
 }

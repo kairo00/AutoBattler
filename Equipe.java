@@ -6,9 +6,16 @@ import java.util.Collections;
 
 public class Equipe {
     private List<Combattant> team;
+    private static int nbEquipe=1;
+    private int id;
 
     public Equipe() {
-        this.team = new ArrayList<>();
+        this.team = new ArrayList<Combattant>();
+        this.id = nbEquipe++;
+    }
+
+    public List<Combattant> getTeam() {
+        return team;
     }
 
     /*
@@ -31,7 +38,18 @@ public class Equipe {
      */
     public Combattant choisirCombattantFaible() {
         Collections.sort(team, new ComparatorVie());
-        return team.get(0);
+        return team.get(team.size()-1);
+    }
+
+    public boolean aDesVivants() {
+        for(int i = 0;i<team.size();i++) {
+            if(team.get(i).isAlive()) return true;
+        }
+        return false;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public boolean loose() {
