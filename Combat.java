@@ -1,21 +1,28 @@
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Combat {
     private Equipe equipe_1;
     private Equipe equipe_2;
     private int cpt_manche=1;
+    Scanner scanner;
 
-    public Combat(Equipe equipe_1, Equipe equipe_2) {
+    public Combat(Equipe equipe_1, Equipe equipe_2, Scanner scanner) {
         this.equipe_1 = equipe_1;
         this.equipe_2 = equipe_2;
+        this.scanner = scanner;
     }
 
     public void lancerCombat() {
-        //tri les combattants par ordre croissant selon leur vitesse
-        while(equipe_1.aDesVivants() && equipe_2.aDesVivants()) {
+        boolean continuer=true;
+        while(equipe_1.aDesVivants() && equipe_2.aDesVivants() && continuer) {
             lancerManche();
+            continuer = Jeu.demanderQuitter(scanner);
         }
-        System.out.println(ecranVictoire());
+        if (continuer) { 
+            System.out.println(ecranVictoire()+"\n Appuyer sur n'importe quelles touches pour quitter.");
+            scanner.nextLine();
+        }
 
     }
 
@@ -61,7 +68,7 @@ public class Combat {
         Collections.sort(equipe_2.getTeam(), new ComparatorVitesse());
         
         String str = "";
-        str += "======[Resulat de la manche "+ cpt_manche + "]======\nEquipe 1:\n";
+        str += "======[Resulat de la manche "+ (cpt_manche) + "]======\nEquipe 1:\n";
         for(Combattant c : equipe_1.getTeam()) {
             str += c.toString()+" "+c.isAlive()+c.getVit()+"\n";
         }
