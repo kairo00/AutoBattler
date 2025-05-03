@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"jeu"},{"l":"jeu.combattants"},{"l":"jeu.comparateurs"},{"l":"jeu.gestions"}];updateSearchResults();

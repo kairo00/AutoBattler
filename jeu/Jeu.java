@@ -1,14 +1,36 @@
+package jeu;
 import java.util.*;
 
+import jeu.combattants.Archer;
+import jeu.combattants.Berserker;
+import jeu.combattants.Guerrier;
+import jeu.combattants.Mage;
+import jeu.combattants.Paladin;
+import jeu.combattants.Voleur;
+import jeu.gestions.Combat;
+import jeu.gestions.Equipe;
+
+/**
+ * Cette classe est le fichier principal.
+ * La classe Jeu gère le fonctionnement du jeu: les menus, les différents mode de jeu, ainsi que le choix des combattants.
+ * @author Hugo Marion
+ * @author Johan Geyer
+ * @version 1.0
+ */
 public class Jeu {
 
+    /**
+     * 
+     * @param equipe
+     * @param scanner
+     */
     public static void choixCombattant(Equipe equipe, Scanner scanner) {
         int nbCombattant;
         String choix;
         String[] combattants = {"Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"};
 
         do {
-        equipe.getTeam().clear();
+        equipe.getEquipe().clear();
         System.out.println("\n\nChoix pour l'équipe "+equipe.getID());
         for (int i = 0; i < combattants.length; i++) {
             System.out.println("Nombre de " + combattants[i] + " :");
@@ -16,16 +38,16 @@ public class Jeu {
             scanner.nextLine();
             for (int j = 0; j < nbCombattant; j++) {
                 switch (i) {
-                    case 0: equipe.getTeam().add(new Paladin()); break;
-                    case 1: equipe.getTeam().add(new Berserker()); break;
-                    case 2: equipe.getTeam().add(new Mage()); break;
-                    case 3: equipe.getTeam().add(new Archer()); break;
-                    case 4: equipe.getTeam().add(new Voleur()); break;
-                    case 5: equipe.getTeam().add(new Guerrier());
+                    case 0: equipe.getEquipe().add(new Paladin()); break;
+                    case 1: equipe.getEquipe().add(new Berserker()); break;
+                    case 2: equipe.getEquipe().add(new Mage()); break;
+                    case 3: equipe.getEquipe().add(new Archer()); break;
+                    case 4: equipe.getEquipe().add(new Voleur()); break;
+                    case 5: equipe.getEquipe().add(new Guerrier());
                 }
             }
         }
-        if(equipe.getTeam().isEmpty()) {
+        if(equipe.getEquipe().isEmpty()) {
              System.out.println("Impossible de lancer le combat.\n\t Touche [Entrer] : Refaire son équipe.\n\t Autres touches : quitter la partie.\nChoix :");
             choix = scanner.nextLine();
         } else {
@@ -34,6 +56,11 @@ public class Jeu {
         }while(choix.isEmpty());
     }   
 
+    /**
+     * 
+     * @param equipe
+     * @param scanner
+     */
     public static void choixCombattantPvp(Equipe equipe, Scanner scanner) {
         int choix;
         ArrayList<String> combattants = new ArrayList<>(Arrays.asList("Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"));
@@ -50,12 +77,12 @@ public class Jeu {
         choix = saisieMenu(scanner, 1, 3);
         scanner.nextLine();
         switch (combattantHasard[choix-1]) {
-            case "Paladin": equipe.getTeam().add(new Paladin()); break;
-            case "Berserker": equipe.getTeam().add(new Berserker()); break;
-            case "Mage": equipe.getTeam().add(new Mage()); break;
-            case "Archer": equipe.getTeam().add(new Archer()); break;
-            case "Voleur": equipe.getTeam().add(new Voleur()); break;
-            case "Guerrier": equipe.getTeam().add(new Guerrier());
+            case "Paladin": equipe.getEquipe().add(new Paladin()); break;
+            case "Berserker": equipe.getEquipe().add(new Berserker()); break;
+            case "Mage": equipe.getEquipe().add(new Mage()); break;
+            case "Archer": equipe.getEquipe().add(new Archer()); break;
+            case "Voleur": equipe.getEquipe().add(new Voleur()); break;
+            case "Guerrier": equipe.getEquipe().add(new Guerrier());
         }
     }
 
@@ -63,12 +90,12 @@ public class Jeu {
         String[] combattants = {"Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"};
         int r = (int) (Math.random()*combattants.length);
         switch (combattants[r]) {
-            case "Paladin": equipe.getTeam().add(new Paladin()); break;
-            case "Berserker": equipe.getTeam().add(new Berserker()); break;
-            case "Mage": equipe.getTeam().add(new Mage()); break;
-            case "Archer": equipe.getTeam().add(new Archer()); break;
-            case "Voleur": equipe.getTeam().add(new Voleur()); break;
-            case "Guerrier": equipe.getTeam().add(new Guerrier());
+            case "Paladin": equipe.getEquipe().add(new Paladin()); break;
+            case "Berserker": equipe.getEquipe().add(new Berserker()); break;
+            case "Mage": equipe.getEquipe().add(new Mage()); break;
+            case "Archer": equipe.getEquipe().add(new Archer()); break;
+            case "Voleur": equipe.getEquipe().add(new Voleur()); break;
+            case "Guerrier": equipe.getEquipe().add(new Guerrier());
         }
         System.out.println("[🤖] À choisi "+combattants[r]);
     }
@@ -123,13 +150,13 @@ public class Jeu {
             if (choix == TEST) {
                 partieLance=true;
                 choixCombattant(equipe1, scanner);
-                if(equipe1.getTeam().isEmpty()) continue;
+                if(equipe1.getEquipe().isEmpty()) continue;
                 choixCombattant(equipe2, scanner);
-                if(equipe2.getTeam().isEmpty()) continue;
+                if(equipe2.getEquipe().isEmpty()) continue;
                 arene.lancerCombat();
             } else if(choix == PVP) {
-                equipe1.getTeam().clear();
-                equipe2.getTeam().clear();
+                equipe1.getEquipe().clear();
+                equipe2.getEquipe().clear();
                 for(int i = 0;i<(TEAM_SIZE*2);i++) {
                     if(i%2==0) choixCombattantPvp(equipe1, scanner);
                     else choixCombattantPvp(equipe2, scanner);
@@ -140,8 +167,8 @@ public class Jeu {
                     partieLance=false;
                 }
             } else if(choix == PVE) {
-                equipe1.getTeam().clear();
-                equipe2.getTeam().clear();
+                equipe1.getEquipe().clear();
+                equipe2.getEquipe().clear();
                 for(int i = 0;i<(TEAM_SIZE*2);i++) {
                     if(i%2==0) choixCombattantPvp(equipe1, scanner);
                     else choixCombattantOrdi(equipe2);
