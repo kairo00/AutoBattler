@@ -25,4 +25,4 @@ AutoBattler est un projet scolaire de POO en JAVA. Chaque combattant possède de
 
 ---
 
-📄 [Voir la documentation du projet](./jeu/doc/index.html)
+📄 [Voir la documentation du projet](https://hvgo.me/poo/doc-autoBattler/index.html)
