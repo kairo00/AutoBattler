@@ -1,4 +1,4 @@
-# 🛡️ AutoBattler - Projet Java
+# 🛡️ AutoBattler - Projet POO (L1-S2)
 
 ![Bannière](./header.png)
 
