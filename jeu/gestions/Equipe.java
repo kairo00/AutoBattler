@@ -16,19 +16,17 @@ import java.util.Collections;
  */
 public class Equipe {
     private List<Combattant> equipe;
+    
+    /*Compteur statique comptant le nombre d'équipes crées */
     private static int nbEquipe=1;
     private int id;
 
     /**
-     * 
+     * Créé une équipe de combattant(s)
      */
     public Equipe() {
         this.equipe = new ArrayList<Combattant>();
         this.id = nbEquipe++;
-    }
-
-    public List<Combattant> getEquipe() {
-        return equipe;
     }
 
     /**
@@ -62,6 +60,11 @@ public class Equipe {
             if(equipe.get(i).estEnVie()) return true;
         }
         return false;
+    }
+
+    /* Getteurs */
+    public List<Combattant> getEquipe() {
+        return equipe;
     }
 
     public int getID() {

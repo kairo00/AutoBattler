@@ -20,11 +20,11 @@ import jeu.gestions.Equipe;
 public class Jeu {
 
     /**
-     * 
-     * @param equipe
-     * @param scanner
+     * Demande à l'utilisateur le nombre de chaque type de combattants qu'il veut dans sont équipe.
+     * @param equipe qui doit être constituée
+     * @param scanner permettant la saisie utilisateur
      */
-    public static void choixCombattant(Equipe equipe, Scanner scanner) {
+    public static void choixCombattantTest(Equipe equipe, Scanner scanner) {
         int nbCombattant;
         String choix;
         String[] combattants = {"Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"};
@@ -57,25 +57,30 @@ public class Jeu {
     }   
 
     /**
-     * 
-     * @param equipe
-     * @param scanner
+     * Propose une liste de trois combattants à l'utilisateur, il ne peut en choisir qu'un parmis les 3 dans son équipe.
+     * @param equipe qui doit être constituée
+     * @param scanner permettant la saisie utilisateur
      */
     public static void choixCombattantPvp(Equipe equipe, Scanner scanner) {
-        int choix;
+        /*Liste mélangée contenant tout les combattants */
         ArrayList<String> combattants = new ArrayList<>(Arrays.asList("Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"));
         Collections.shuffle(combattants);
 
+        /* Tableau contenant les combattants tirés au hasard */
         String [] combattantHasard = {combattants.get(0), combattants.get(1), combattants.get(2)};
 
+        /* Affichage des 3 combattants. */
         System.out.println("\n\nChoix pour l'équipe "+equipe.getID());
         System.out.println("Choisi parmis les combattants suivant:");
         for(int i = 0; i<3;i++) {
             System.out.println((i+1)+". "+combattantHasard[i]);
         }
 
-        choix = saisieMenu(scanner, 1, 3);
+        /* Saisie du choix de l'utilisateur */
+        int choix = saisieMenu(scanner, 1, 3);
         scanner.nextLine();
+
+        /* Ajoute le bon membre de l'équipe selon le choix d'utilisateur */
         switch (combattantHasard[choix-1]) {
             case "Paladin": equipe.getEquipe().add(new Paladin()); break;
             case "Berserker": equipe.getEquipe().add(new Berserker()); break;
@@ -86,6 +91,10 @@ public class Jeu {
         }
     }
 
+    /**
+     * Attribut automatiquement et aléatoirement un combattant dans l'équipe de l'ordinateur.
+     * @param equipe qui doti etre constituée (ordinateur)
+     */
     public static void choixCombattantOrdi(Equipe equipe) {
         String[] combattants = {"Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier"};
         int r = (int) (Math.random()*combattants.length);
@@ -100,10 +109,17 @@ public class Jeu {
         System.out.println("[🤖] À choisi "+combattants[r]);
     }
 
+    /* optionnelle (a voir) */
     public static void afficherMenu() {
         return;
     }
-
+    /**
+     * Permet de gérer le choix des utilisateurs dans le menu ou en partie.
+     * @param scanner permettant la saisie de l'utilisateur
+     * @param min entier minimum que l'utilisateur doit saisir pour que le choix soit correcte
+     * @param max entier maximum que l'utilisateur doit saisir pour que le choix soit correcte
+     * @return l'entier correspondant au choix de l'utilisateur
+     */
     public static int saisieMenu(Scanner scanner, int min, int max) {
         int choix;
         do {
@@ -112,7 +128,11 @@ public class Jeu {
         }while(choix < min || choix > max);
         return choix;
     }
-
+    /**
+     * Demande a l'utilisateur s'il veut quitter ou continuer la partie en cours.
+     * @param scanner permettant la saisie utilisateur
+     * @return un booléen, true si l'utilisateur entre n, false s'il entre y
+     */
     public static boolean demanderQuitter(Scanner scanner) {
         char choix;
         do {
@@ -121,39 +141,37 @@ public class Jeu {
         }while (choix != 'y' && choix != 'n' && choix != 'Y' && choix != 'N');
         return (choix == 'n' || choix == 'N');
     }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Equipe equipe1 = new Equipe();
         Equipe equipe2 = new Equipe();
         Combat arene = new Combat(equipe1, equipe2, scanner);
-        final int TEST=1, PVP=2, PVE=3, QUITTER = 4, TEAM_SIZE=5;
 
-        /*
-         *  Temporaire
-         *  Espace de test pour nos méthodes.
-         */
-
+        final int TEST=1, PVP=2, PVE=3, QUITTER=4, TEAM_SIZE=5;
         boolean partieLance;
         int choix = 0;
         while(true) {
 
-            //Affichage fct
+            //Affichage du menu
             System.out.println("1. Mode Test 🧪");
-            System.out.println("2. Mode PVP ( 🚧 En construction...)");
-            System.out.println("3. Mode PVE 🤖");
+            System.out.println("2. Mode PVP");
+            System.out.println("3. Mode PVE 🤖 (Un peu claqué)");
             System.out.println("4. Quitter 🚪");
             
-            //Saisie utilisateur fct
+            //Saisie utilisateur
             choix = saisieMenu(scanner, 1, 4);
 
-
+            /* Mode test */
             if (choix == TEST) {
                 partieLance=true;
-                choixCombattant(equipe1, scanner);
+                choixCombattantTest(equipe1, scanner);
                 if(equipe1.getEquipe().isEmpty()) continue;
-                choixCombattant(equipe2, scanner);
+                choixCombattantTest(equipe2, scanner);
                 if(equipe2.getEquipe().isEmpty()) continue;
                 arene.lancerCombat();
+            
+            /* Mode PVP */
             } else if(choix == PVP) {
                 equipe1.getEquipe().clear();
                 equipe2.getEquipe().clear();
@@ -166,6 +184,8 @@ public class Jeu {
                     arene.lancerCombat();
                     partieLance=false;
                 }
+            
+            /* Mode PVE */
             } else if(choix == PVE) {
                 equipe1.getEquipe().clear();
                 equipe2.getEquipe().clear();
@@ -178,6 +198,8 @@ public class Jeu {
                     arene.lancerCombat();
                     partieLance=false;
                 }
+            
+            /* Quitter le jeu */
             } else if (choix == QUITTER) break;
         }
         scanner.close();
