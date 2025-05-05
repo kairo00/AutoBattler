@@ -1,8 +1,8 @@
 
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Equipe {
     private List<Combattant> team;
@@ -10,7 +10,7 @@ public class Equipe {
     private int id;
 
     public Equipe() {
-        this.team = new ArrayList<Combattant>();
+        this.team = new ArrayList<>();
         this.id = nbEquipe++;
     }
 
@@ -52,16 +52,12 @@ public class Equipe {
         return id;
     }
 
-    public boolean loose() {
-        int somme = 0;
-        for(Combattant c : team) {
-            if(c.isAlive()) {
-                somme += c.getPV();
-            }
+    @Override
+    public String toString() {
+        String s = "";
+        for(Combattant i : team) {
+            s+= i.toString()+"\n";
         }
-        if (somme <= 0) {
-            return true;
-        }
-        return false;
+        return s;
     }
 }

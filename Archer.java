@@ -3,9 +3,10 @@
 public class Archer extends Combattant {
 
     Archer() {
-        super(170, 55, 5, 60);
+        super(170, 55, 5, 60, 100);
     }
 
+    @Override
     void attack(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantFaible();
         adversaire.damage(this);
@@ -16,6 +17,7 @@ public class Archer extends Combattant {
         return "A["+getPV()+"/170]";
     }
 
+    @Override
     public String getNom() {
         return "Archer";
     }

@@ -18,6 +18,9 @@ public class GamePanel extends JPanel implements Runnable{
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
+    int FPS = 60;
+    Player p = new Player(this);
+
     Thread gameThread;
 
     int playerX = 100;
@@ -35,24 +38,40 @@ public class GamePanel extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        while(gameThread != null) {
 
+        double drawInterval = 1000000000;
+        double nextDrawTime = System.nanoTime() + drawInterval;
+
+
+        while(gameThread != null) {
+            
             update(null);
             repaint();
 
+            try {
+                double remaingTime = nextDrawTime - System.nanoTime();
+                remaingTime = remaingTime/1000000;
+
+                if(remaingTime < 0) {
+                    remaingTime = 0;
+                }
+
+                Thread.sleep((long) remaingTime);
+
+                nextDrawTime += drawInterval;
+
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 
     public void paintComponent(Graphics g) {
         
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.white);
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
-        g2.dispose();
-
-        
+        p.Draw(g2);    
     }
 
 }

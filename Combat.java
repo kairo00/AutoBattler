@@ -35,7 +35,7 @@ public class Combat {
             // ekip 1
             while (i < equipe_1.getTeam().size() && !equipe_1.getTeam().get(i).isAlive()) i++;
             if (i < equipe_1.getTeam().size() && (cpt_tour % 2 == 0 || !attaqueOK)) {
-                equipe_1.getTeam().get(i).attack(equipe_2);
+                equipe_1.getTeam().get(i).action(equipe_2, equipe_1);
                 i++;
                 attaqueOK = true;
             }
@@ -44,7 +44,7 @@ public class Combat {
             while (j < equipe_2.getTeam().size() && !equipe_2.getTeam().get(j).isAlive()) j++;
 
             if (j < equipe_2.getTeam().size() && (cpt_tour % 2 == 1 || !attaqueOK)) {
-                equipe_2.getTeam().get(j).attack(equipe_1);
+                equipe_2.getTeam().get(j).action(equipe_1, equipe_2);
                 j++;
                 attaqueOK = true;
             }

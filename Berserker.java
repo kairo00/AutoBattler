@@ -3,7 +3,7 @@
 public class Berserker extends Combattant{
    
     Berserker() {
-        super(220, 55, 10, 50);
+        super(220, 55, 10, 50, 80);
     }
 
     @Override
@@ -22,6 +22,7 @@ public class Berserker extends Combattant{
         return "B["+getPV()+"/220]";
     }
 
+    @Override
     public String getNom() {
         return "Berseker";
     }

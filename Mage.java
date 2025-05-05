@@ -3,7 +3,7 @@
 public class Mage extends Combattant {
 
     Mage() {
-        super(160, 70, 0, 30);
+        super(160, 70, 0, 30, 120);
     }
 
     @Override
@@ -24,6 +24,7 @@ public class Mage extends Combattant {
         return "M["+getPV()+"/160]";
     }
 
+    @Override
     public String getNom() {
         return "Mage";
     }

@@ -2,7 +2,7 @@
 public class Guerrier extends Combattant{
     
     Guerrier() {
-        super(220, 30, 25, 20);
+        super(220, 30, 25, 20, 100);
     }
 
     @Override
@@ -19,6 +19,7 @@ public class Guerrier extends Combattant{
         return "G["+getPV()+"/220]";
     }
 
+    @Override
     public String getNom() {
         return "Guerrier";
     }

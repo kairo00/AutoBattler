@@ -1,12 +1,15 @@
 
 public class Paladin extends Combattant {
     Paladin() {
-        super(200, 45, 25, 10);
+        super(200, 45, 25, 10, 100);
     }
 
     @Override
-    public void passive(Combattant cible) {
-        int pv = getPV();
+    void attack(Equipe ennemis) {
+        int pv= getPV();
+        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        adversaire.damage(this);
+        
         if(pv <= 190) {
             regenererPV(10);
         }
@@ -16,15 +19,11 @@ public class Paladin extends Combattant {
     }
 
     @Override
-    void attack(Equipe ennemis) {
-        super.attack(ennemis);
-    }
-
-    @Override
     public String toString() {
         return "P["+getPV()+"/200]";
     }
 
+    @Override
     public String getNom() {
         return "Paladin";
     }
