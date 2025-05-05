@@ -1,6 +1,6 @@
 # 🛡️ AutoBattler - Projet POO (L1-S2)
 
-![Bannière](./header.png)
+![Bannière](../Image/header.png)
 
 ## 🎮 Description
 
