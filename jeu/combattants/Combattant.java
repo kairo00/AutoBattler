@@ -12,9 +12,11 @@ import jeu.gestions.Equipe;
 public abstract class Combattant {
     private int pv;
     private int pvMax;
+    private int madness;
     private int attaque;
     private int defense;
     private int vitesse;
+    private int fuite = 0;
     private int id;
     private Combattant cible;
   
@@ -27,9 +29,10 @@ public abstract class Combattant {
      * @param defense définit la puissance de la défense du combattant
      * @param vitesse définit la vitesse du combattant
      */
-    Combattant(int pvMax, int attaque, int defense, int vitesse){
+    Combattant(int pvMax, int attaque, int defense, int vitesse, int madness){
         this.pv = pvMax;
         this.pvMax = pvMax;
+        this.madness = madness;
         this.attaque = attaque;
         this.defense = defense;
         this.vitesse = vitesse;
@@ -39,8 +42,12 @@ public abstract class Combattant {
     /**
      * 
      */
-    public void cible(Equipe equipe) {
+    public void cibleAdverse(Equipe equipe) {
         cible =  equipe.choisirCombattantAleatoire();
+    }
+
+    public void action(Equipe ennemie, Equipe alliée) {
+        attaquer(ennemie);
     }
 
     /**
@@ -59,10 +66,15 @@ public abstract class Combattant {
      * @param attaquant
      */
     public void prendreDegat(Combattant attaquant) {
+        int r = (int)(3*Math.random());
         if (activerEsquive() || (attaquant.getAttaque() <= getDefense())) {
             return;
         }
         int degat = attaquant.calculerDegat(this);
+        removeMadness(10);
+        if(r == 1) {
+            fuite++;
+        }
         if(degat > 0) pv = Math.max(0, pv - degat);
         activerPassive(attaquant);
     }
@@ -103,15 +115,19 @@ public abstract class Combattant {
     public void activerPassive(Combattant cible) {
     }
 
+    public void soin(Equipe cible) {
+    }
+
+    public void removeMadness(int madness) {
+        if(estEnVie())this.madness -= madness;
+    }
+
     /**
      * 
      * @return
      */
     public boolean estEnVie(){
-        if(pv > 0) {
-            return true;
-        }
-        return false;
+        return (fuite < 1 && pv > 0);
     }
 
     /**
@@ -148,7 +164,11 @@ public abstract class Combattant {
     Combattant getCible() {
         return cible;
     }
-  
+
+    int getMadness() {
+        return madness;
+    }
+
     public abstract String getNom();
 
 }

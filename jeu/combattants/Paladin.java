@@ -17,7 +17,7 @@ public class Paladin extends Combattant {
      * 
      */
     public Paladin() {
-        super(200, 45, 25, 10);
+        super(200, 45, 25, 10, 100);
     }
 
     /**

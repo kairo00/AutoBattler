@@ -17,7 +17,7 @@ public class Archer extends Combattant {
      * Crée
      */
     public Archer() {
-        super(170, 55, 5, 60);
+        super(170, 55, 5, 60, 100);
     }
 
     /**

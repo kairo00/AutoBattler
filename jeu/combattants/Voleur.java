@@ -15,7 +15,7 @@ public class Voleur extends Combattant{
      * 
      */
     public Voleur() {
-        super(145, 45, 20, 40);
+        super(145, 45, 20, 40, 100);
     }
 
     /**

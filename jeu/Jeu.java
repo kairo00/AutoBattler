@@ -1,12 +1,7 @@
 package jeu;
 import java.util.*;
 
-import jeu.combattants.Archer;
-import jeu.combattants.Berserker;
-import jeu.combattants.Guerrier;
-import jeu.combattants.Mage;
-import jeu.combattants.Paladin;
-import jeu.combattants.Voleur;
+import jeu.combattants.*;
 import jeu.gestions.Combat;
 import jeu.gestions.Equipe;
 
