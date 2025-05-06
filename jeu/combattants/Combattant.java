@@ -12,7 +12,7 @@ import jeu.gestions.Equipe;
 public abstract class Combattant {
     private int pv;
     private int pvMax;
-    private int madness;
+    private int courage;
     private int attaque;
     private int defense;
     private int vitesse;
@@ -29,10 +29,10 @@ public abstract class Combattant {
      * @param defense définit la puissance de la défense du combattant
      * @param vitesse définit la vitesse du combattant
      */
-    Combattant(int pvMax, int attaque, int defense, int vitesse, int madness){
+    public Combattant(int pvMax, int attaque, int defense, int vitesse, int madness){
         this.pv = pvMax;
         this.pvMax = pvMax;
-        this.madness = madness;
+        this.courage = madness;
         this.attaque = attaque;
         this.defense = defense;
         this.vitesse = vitesse;
@@ -58,7 +58,7 @@ public abstract class Combattant {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         if(adversaire == null || !adversaire.estEnVie()) return;
         adversaire.prendreDegat(this);
-        System.out.println(adversaire.getNom()+"[Equipe "+ennemis.getID()+"] "+" a subit une attaque de "+getNom()+"lui infligeant "+getAttaque()+"de dégats || pv: "+adversaire.getPV()+"/"+adversaire.getPvMax());
+        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax() + "  " + adversaire.getCourage());
     }
 
     /**
@@ -71,12 +71,11 @@ public abstract class Combattant {
             return;
         }
         int degat = attaquant.calculerDegat(this);
-        removeMadness(10);
-        if(r == 1) {
+        soustraireCourage(10);
+        if(courage==0 && r == 1) {
             fuite++;
         }
         if(degat > 0) pv = Math.max(0, pv - degat);
-        activerPassive(attaquant);
     }
 
     /**
@@ -96,6 +95,14 @@ public abstract class Combattant {
         if(estEnVie())this.pv += pv;
     }
 
+    public void regenererCourage(int courage){
+        if(estEnVie())this.courage += courage;
+    }
+    
+    public void soustraireCourage(int courage) {
+         if(estEnVie())this.courage -= courage;
+    }
+
     /**
      * 
      * @return
@@ -103,23 +110,14 @@ public abstract class Combattant {
     public boolean activerEsquive() {
         int r = (int)(21*Math.random());
         if(r == 1) {
+            System.out.println("ESQUIVERRRR");
             return true;
         }
+        System.out.println("Pas esquiver...");
         return false;
     }
 
-    /**
-     * 
-     * @param cible
-     */
-    public void activerPassive(Combattant cible) {
-    }
-
     public void soin(Equipe cible) {
-    }
-
-    public void removeMadness(int madness) {
-        if(estEnVie())this.madness -= madness;
     }
 
     /**
@@ -133,9 +131,8 @@ public abstract class Combattant {
     /**
      * 
      */
-    public String toString(){
-        return "Combattant";
-    }
+    @Override
+    public abstract String toString();
 
     public int getPV() {
         return pv;
@@ -165,8 +162,8 @@ public abstract class Combattant {
         return cible;
     }
 
-    int getMadness() {
-        return madness;
+    public int getCourage() {
+        return courage;
     }
 
     public abstract String getNom();

@@ -21,12 +21,13 @@ public class Guerrier extends Combattant{
      * 
      */
     @Override
-    public void activerPassive(Combattant cible) {
+    public void prendreDegat(Combattant cible) {
         int r = (int)(Math.random()*10);
+        super.prendreDegat(cible);
         if(r < 6) {
             cible.prendreDegat(this);
+            System.out.println("BOOM CONTRE ATTAQUE");
         }
-        /* System.out.println(cible.getNom()+" perds "+(getAtk()-cible.getDef())+" pv:"+cible.getPV()+"/220"); */
     }
 
     /**

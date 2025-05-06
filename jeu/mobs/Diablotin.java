@@ -1,4 +1,5 @@
-package jeu.combattants;
+package jeu.mobs;
+import jeu.combattants.Combattant;
 
 public class Diablotin extends Combattant{
 

@@ -24,22 +24,19 @@ public class Paladin extends Combattant {
      * 
      */
     @Override
-    public void activerPassive(Combattant cible) {
-        int pv = getPV();
-        if(pv <= 190) {
+    public void attaquer(Equipe ennemis) {
+        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        adversaire.prendreDegat(this);
+
+        if(getPV() <= 190) {
             regenererPV(10);
         }
-        if(pv > 190) {
-            regenererPV(200-pv);
+        if(getPV() > 190) {
+            regenererPV(200-getPV());
         }
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public void attaquer(Equipe ennemis) {
-        super.attaquer(ennemis);
+        System.out.println(getNom() + "[Equipe " + getId() + "] a attaqué " + adversaire.getNom() + "[Equipe " + ennemis.getID() + "] et lui a infligé " + getAttaque() + " dégâts.");
+        System.out.println(">>> PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax() + " | Courage : " + adversaire.getCourage());
+        System.out.println(">>> PV attaquant : " + getPV() + "/" + getPvMax() + " | Courage : " + getCourage());
     }
 
     /**

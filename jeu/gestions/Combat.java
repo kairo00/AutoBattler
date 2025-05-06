@@ -68,10 +68,10 @@ public class Combat {
 
             for (Combattant attaquant : attaquantTri) {
                 if (equipe_1.getEquipe().contains(attaquant)) {
-                    attaquant.attaquer(equipe_2);
+                    attaquant.action(equipe_2, equipe_1);
                     if (!equipe_1.aDesVivants() || !equipe_2.aDesVivants()) break;
                 } else if(equipe_2.getEquipe().contains(attaquant)) {
-                    attaquant.attaquer(equipe_1);
+                    attaquant.action(equipe_1, equipe_2);
                     if (!equipe_1.aDesVivants() || !equipe_2.aDesVivants()) break;
                 } else {
                     break;

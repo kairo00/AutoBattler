@@ -3,8 +3,9 @@ import java.util.*;
 
 
 import jeu.combattants.*;
-import jeu.gestions.Combat;
 import jeu.gestions.*;
+import jeu.inventaire.*;
+import jeu.mobs.*;
 
 public class JeuAlternatif {
 
@@ -75,7 +76,7 @@ public class JeuAlternatif {
             int choix = scanner.nextInt();
                 switch(choix) {
                     case 1 : prochainEvent(equipe, scanner); break;
-                    case 2 : inventaire.ouvrirInventaire(); break;
+                    /* case 2 : inventaire.ouvrirInventaire(); break; */
                     case 3 : equipe.toString();
                 }
             System.out.println("");

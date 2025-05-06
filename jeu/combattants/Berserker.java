@@ -16,7 +16,7 @@ public class Berserker extends Combattant{
      * 
      */
     public Berserker() {
-        super(220, 55, 10, 50, 80);
+        super(220, 55, 10, 50, 120);
     }
 
     /**
