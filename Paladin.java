@@ -1,7 +1,7 @@
 
 public class Paladin extends Combattant {
     Paladin() {
-        super(200, 45, 25, 10, 100);
+        super(200, 45, 25, 10, 110);
     }
 
     @Override

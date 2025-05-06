@@ -1,7 +1,7 @@
 public class Pretre extends Combattant{
     private int res = 0;
     Pretre() {
-        super(160, 35, 20, 20, 120);
+        super(160, 35, 20, 20, 80);
     }
     
     @Override

@@ -2,16 +2,17 @@
 public class Guerrier extends Combattant{
     
     Guerrier() {
-        super(220, 30, 25, 20, 100);
+        super(220, 30, 25, 20, 110);
     }
 
     @Override
-    public void passive(Combattant cible) {
+    public void damage(Combattant cible) {
         int r = (int)(Math.random()*10);
+        super.damage(cible);
         if(r < 6) {
             cible.damage(this);
+            System.out.println("BOOM CONTRE ATTAQUE");
         }
-        System.out.println(cible.getNom()+" perds "+(getAtk()-cible.getDef())+" pv:"+cible.getPV()+"/220");
     }
 
     @Override

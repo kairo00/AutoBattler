@@ -1,25 +1,25 @@
 public class Abomination extends Combattant {
 
     Abomination() {
-        super(200, 30, 20, 20, 50);
+        super(200, 30, 20, 20, 80);
     }
 
     @Override
     void attack(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
-        regenererPV(2);
-        if(getMadness() > 0) {
+        regenererPV(5);
+        if(getPeur() > 0) {
             adversaire.damage(this);
         }
-        if(getMadness() > -10) {
+        if(getPeur() > -10) {
             adversaire.damage(this);
             adversaire.damage(this);
         }else{
-            if(getMadness() > -20) {
+            if(getPeur() > -20) {
                 adversaire.damage(this);
                 adversaire.damage(this);
             }else{
-                if(getMadness() > -30) {
+                if(getPeur() > -30) {
                     adversaire.damage(this);
                     adversaire.damage(this);
                     adversaire.damage(this);

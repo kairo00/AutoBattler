@@ -1,9 +1,8 @@
 public abstract class Combattant {
 
-    static int compteur = 20;
     private final int pvMax;
     private int pv;
-    private int madness;
+    private int peur;
     private final int attaque;
     private final int defense;
     private final int vitesse;
@@ -13,7 +12,7 @@ public abstract class Combattant {
   
     public static int cpt = 0;
 
-    Combattant(int pv, int attaque, int defense, int vitesse, int madness){
+    Combattant(int pv, int attaque, int defense, int vitesse, int peur){
         this.pv = pv;
         this.attaque = attaque;
         this.defense = defense;
@@ -41,12 +40,11 @@ public abstract class Combattant {
             return;
         }
         int degat = attaquant.Degat(this);
-        removeMadness(10);
+        soustrairePeur(10);
         if(r == 1) {
             fuite++;
         }
         if(degat > 0) pv = Math.max(0, pv - degat);
-        passive(attaquant);
 
 
     }
@@ -58,9 +56,13 @@ public abstract class Combattant {
     public void regenererPV(int pv) {
         if(isAlive())this.pv += pv;
     }
+
+    public void regenererPeur(int peur){
+        if(isAlive())this.peur += peur;
+    }
     
-    public void removeMadness(int madness) {
-         if(isAlive())this.madness -= madness;
+    public void soustrairePeur(int peur) {
+         if(isAlive())this.peur -= peur;
     }
 
     public boolean esquive() {
@@ -68,8 +70,6 @@ public abstract class Combattant {
         return r == 1;
     }
 
-    public void passive(Combattant cible) {
-    }
     public void soin(Equipe cible) {
     }
 
@@ -101,8 +101,8 @@ public abstract class Combattant {
         return id;
     }
 
-    int getMadness() {
-        return madness;
+    int getPeur() {
+        return peur;
     }
     
     Combattant getCible() {
