@@ -30,6 +30,7 @@ public class Paladin extends Combattant {
 
         if(getPV() <= 190) {
             regenererPV(10);
+            System.out.println("+10pv (<= 190) pour le paladin");
         }
         if(getPV() > 190) {
             regenererPV(200-getPV());

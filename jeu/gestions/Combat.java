@@ -3,9 +3,9 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import jeu.Jeu;
 import jeu.combattants.Combattant;
 import jeu.comparateurs.ComparatorVitesse;
+import jeu.mode.Jeu;
 /**
  * Représente un combat entre deux équipes.
  * La classe Combat gère le lancement du combat, des manches, ainsi que l'affichage inter manches et à la fin des combats.

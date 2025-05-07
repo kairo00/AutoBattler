@@ -73,7 +73,7 @@ public class Inventaire {
     
     @Override
     public String toString() {
-        String s = "+------------------------------------+ \n";
+        String s = "+--------------[Inventaire]--------------+ \n";
         for(Item i: inventaire.keySet()) {
             s += "Item : "+i+"\t Nombre : "+inventaire.get(i)+"\n";
         }
