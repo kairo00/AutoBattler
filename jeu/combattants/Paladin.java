@@ -19,8 +19,6 @@ public class Paladin extends Combattant {
             regenererPV(200-getPV());
         }
         System.out.println(getNom() + "[Equipe " + getId() + "] a attaqué " + adversaire.getNom() + "[Equipe " + ennemis.getID() + "] et lui a infligé " + getAttaque() + " dégâts.");
-        System.out.println(">>> PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax() + " | Courage : " + adversaire.getCourage());
-        System.out.println(">>> PV attaquant : " + getPV() + "/" + getPvMax() + " | Courage : " + getCourage());
     }
 
     /**

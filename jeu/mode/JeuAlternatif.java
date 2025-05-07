@@ -15,30 +15,30 @@ public class JeuAlternatif {
         String[] combattants = {"Paladin", "Berserker", "Mage", "Archer", "Voleur", "Guerrier", "Pretre", "Abomination"};
         System.out.println("Veuillez choisir vos combattants (Max 4)");
         for (int i = 0; i < combattants.length; i++) {
-            System.out.println(i+". "+combattants[i]);
+            System.out.println(i+1+". "+combattants[i]);
         }
         for(int i = 4; i > 0; i--) {
             nbCombattant = scanner.nextInt();
-            System.out.println("Vous avez selectionné "+combattants[nbCombattant]+", il vous reste "+(i-1)+" choix");
+            System.out.println("Vous avez selectionné "+combattants[nbCombattant-1]+", il vous reste "+(i-1)+" choix");
             switch (nbCombattant) {
-                case 0 -> equipe.getEquipe().add(new Paladin());
-                case 1 -> equipe.getEquipe().add(new Berserker());
-                case 2 -> equipe.getEquipe().add(new Mage());
-                case 3 -> equipe.getEquipe().add(new Archer());
-                case 4 -> equipe.getEquipe().add(new Voleur());
-                case 5 -> equipe.getEquipe().add(new Guerrier());
-                case 6 -> equipe.getEquipe().add(new Pretre());
-                case 7 -> equipe.getEquipe().add(new Abomination());
+                case 1 -> equipe.getEquipe().add(new Paladin());
+                case 2 -> equipe.getEquipe().add(new Berserker());
+                case 3 -> equipe.getEquipe().add(new Mage());
+                case 4 -> equipe.getEquipe().add(new Archer());
+                case 5 -> equipe.getEquipe().add(new Voleur());
+                case 6 -> equipe.getEquipe().add(new Guerrier());
+                case 7 -> equipe.getEquipe().add(new Pretre());
+                case 8 -> equipe.getEquipe().add(new Abomination());
                 
             }
         }
     }
 
     public static void Mobs(Equipe groupe) {
-        int nombre = (int)(6*Math.random());
-        int type = (int)(3*Math.random());
+        int nombre = (int)(3*Math.random()+3);
 
         for(int i = 0; i < nombre; i++) {
+            int type = (int)(3*Math.random());
             switch(type) {
                 case 0 -> groupe.getEquipe().add(new Diablotin());
                 case 1 -> groupe.getEquipe().add(new Cultist());
@@ -49,21 +49,21 @@ public class JeuAlternatif {
 
     public static void prochainEvent(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
         
-        int seed = (int)(3*Math.random());
-        switch(seed) {
-            case 0 -> {
+        int seed = (int)(10*Math.random());
+            if(seed < 7) {
                 Equipe mobs = new Equipe();
                 Mobs(mobs);
                 Combat arene = new Combat(equipe, mobs, scanner);
                 arene.lancerCombat();
-            }
-            case 1 -> repos(equipe);
-            case 2 -> {
-                InventaireMarchand inventaireMarchand = new InventaireMarchand();
-                inventaireMarchand.shopping(scanner, inventaire, equipe);
+            }else{
+                if(seed < 9) {
+                    repos(equipe);
+                } else {
+                    InventaireMarchand inventaireMarchand = new InventaireMarchand();
+                    inventaireMarchand.shopping(scanner, inventaire, equipe);
+                }
             }
         }
-    }
 
     public static void repos(Equipe equipe) {
         for(Combattant i : equipe.getEquipe()) {
@@ -79,8 +79,10 @@ public class JeuAlternatif {
 
     public static void boucleDeJeu(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
         while (true) { 
-            System.out.println("1. Prochain evenement");
-            System.out.println("2. Inventaire");
+            System.out.println("+-------------------------+");
+            System.out.println("|  1. Prochain evenement  |");
+            System.out.println("|  2. Inventaire          |");
+            System.out.println("+-------------------------+");
             int choix = scanner.nextInt();
                 switch(choix) {
                     case 1 -> prochainEvent(scanner, equipe, inventaire);

@@ -36,7 +36,7 @@ public abstract class Combattant {
     public void attaquer(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
-        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax() + "  " + adversaire.getCourage());
+        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     public void prendreDegat(Combattant attaquant) {
@@ -75,10 +75,9 @@ public abstract class Combattant {
     public boolean activerEsquive() {
         int r = (int)(21*Math.random());
         if(r == 1) {
-            System.out.println("ESQUIVERRRR");
+            System.out.println("Le "+getNom()+" esquive !");
             return true;
         }
-        System.out.println("Pas esquiver...");
         return false;
     }
 

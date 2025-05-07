@@ -11,11 +11,11 @@ public class Pretre extends Combattant{
     public void soin(Equipe cible) {
         Combattant allié = cible.choisirCombattantAleatoire();
         int pv = allié.getPV();
-        if(pv <= allié.getPVMax()) {
+        if(pv <= allié.getPvMax()) {
             regenererPV(30);
         }
-        if(pv > allié.getPVMax()-30) {
-            regenererPV(allié.getPVMax()-pv);
+        if(pv > allié.getPvMax()-30) {
+            regenererPV(allié.getPvMax()-pv);
         }
     }
 
@@ -29,10 +29,12 @@ public class Pretre extends Combattant{
             attaquer(ennemie);
         }
         if(random == 0 && !mort.estEnVie() && res < 1) {
+            System.out.println("Le pretre ressucite "+alliée.toString());
             soin(alliée);
             res++;
         }else {
             soin(alliée);
+            System.out.println("Le pretre soigne "+alliée.toString()+" de 30 pv");
         }
        
     }

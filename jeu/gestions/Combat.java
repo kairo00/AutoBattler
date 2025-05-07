@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Scanner;
 import jeu.combattants.Combattant;
 import jeu.comparateurs.ComparatorVitesse;
-import jeu.mode.Jeu;
 /**
  * Représente un combat entre deux équipes.
  * La classe Combat gère le lancement du combat, des manches, ainsi que l'affichage inter manches et à la fin des combats.
@@ -39,12 +38,8 @@ public class Combat {
         boolean continuer=true;
         while(equipe_1.aDesVivants() && equipe_2.aDesVivants() && continuer) {
             lancerManche();
-            continuer = Jeu.demanderQuitter(scanner);
         }
-        if (continuer) { 
-            System.out.println(ecranVictoire()+"\n Appuyer sur n'importe quelles touches pour quitter.");
-            scanner.nextLine();
-        }
+        System.out.println(ecranVictoire()+"\n Appuyer sur n'importe quelles touches pour quitter.");
         cpt_manche=1;
     }
 

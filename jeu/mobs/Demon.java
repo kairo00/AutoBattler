@@ -4,7 +4,7 @@ import jeu.combattants.Combattant;
 public class Demon extends Combattant{
 
     public Demon() {
-        super(1, 1, 1, 1, 1);
+        super(150, 40, 20, 35, 200);
     }
     
     @Override

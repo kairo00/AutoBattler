@@ -4,16 +4,16 @@ import jeu.combattants.Combattant;
 public class Diablotin extends Combattant{
 
     public Diablotin() {
-        super(1, 1, 1, 1, 1);
+        super(50, 20, 5, 60 , 100);
     }
     
     @Override
     public String getNom() {
-        return "Abomination";
+        return "Diablotin";
     }
 
     @Override
     public String toString() {
-        return "Ab["+getPV()+"/200]";
+        return "Dia["+getPV()+"/200]";
     }
 }
