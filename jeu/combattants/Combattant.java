@@ -36,6 +36,7 @@ public abstract class Combattant {
     public void attaquer(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
+        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax() + "  " + adversaire.getCourage());
     }
 
     public void prendreDegat(Combattant attaquant) {
@@ -43,9 +44,9 @@ public abstract class Combattant {
         if (activerEsquive() || (attaquant.getAttaque() <= getDefense())) {
             return;
         }
-        int degat = attaquant.calculerDegat(cible);
-        soustraireCourage(5);
-        if(r == 1) {
+        int degat = attaquant.calculerDegat(this);
+        soustraireCourage(10);
+        if(courage==0 && r == 1) {
             fuite++;
         }
         if(degat > 0) pv = Math.max(0, pv - degat);
@@ -67,19 +68,32 @@ public abstract class Combattant {
          if(estEnVie())this.courage -= courage;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean activerEsquive() {
         int r = (int)(21*Math.random());
-        return r == 1;
+        if(r == 1) {
+            System.out.println("ESQUIVERRRR");
+            return true;
+        }
+        System.out.println("Pas esquiver...");
+        return false;
     }
 
     public void soin(Equipe cible) {
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean estEnVie(){
         return (fuite < 1 && pv > 0);
     }
 
-    public int getPVMax() {
+    public int getPvMax() {
         return pvMax;
     }
 
@@ -114,7 +128,7 @@ public abstract class Combattant {
     public Combattant getCible() {
         return cible;
     }
-  
+
     public abstract String getNom();
     @Override
     public abstract String toString();

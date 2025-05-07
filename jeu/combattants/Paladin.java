@@ -8,18 +8,24 @@ public class Paladin extends Combattant {
 
     @Override
     public void attaquer(Equipe ennemis) {
-        int pv= getPV();
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
-        
-        if(pv <= 190) {
+
+        if(getPV() <= 190) {
             regenererPV(10);
+            System.out.println("+10pv (<= 190) pour le paladin");
         }
-        if(pv > 190) {
-            regenererPV(200-pv);
+        if(getPV() > 190) {
+            regenererPV(200-getPV());
         }
+        System.out.println(getNom() + "[Equipe " + getId() + "] a attaqué " + adversaire.getNom() + "[Equipe " + ennemis.getID() + "] et lui a infligé " + getAttaque() + " dégâts.");
+        System.out.println(">>> PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax() + " | Courage : " + adversaire.getCourage());
+        System.out.println(">>> PV attaquant : " + getPV() + "/" + getPvMax() + " | Courage : " + getCourage());
     }
 
+    /**
+     * 
+     */
     @Override
     public String toString() {
         return "P["+getPV()+"/200]";

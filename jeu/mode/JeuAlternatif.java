@@ -1,4 +1,4 @@
-package jeu;
+package jeu.mode;
 
 import java.util.*;
 import jeu.combattants.*;
@@ -19,7 +19,7 @@ public class JeuAlternatif {
         }
         for(int i = 4; i > 0; i--) {
             nbCombattant = scanner.nextInt();
-            System.out.println("Vous avez selectionné "+combattants[nbCombattant]+", il vous reste "+i+" choix");
+            System.out.println("Vous avez selectionné "+combattants[nbCombattant]+", il vous reste "+(i-1)+" choix");
             switch (nbCombattant) {
                 case 0 -> equipe.getEquipe().add(new Paladin());
                 case 1 -> equipe.getEquipe().add(new Berserker());
@@ -57,7 +57,7 @@ public class JeuAlternatif {
                 Combat arene = new Combat(equipe, mobs, scanner);
                 arene.lancerCombat();
             }
-            case 1 -> repos(equipe, scanner);
+            case 1 -> repos(equipe);
             case 2 -> {
                 InventaireMarchand inventaireMarchand = new InventaireMarchand();
                 inventaireMarchand.shopping(scanner, inventaire, equipe);
@@ -65,45 +65,22 @@ public class JeuAlternatif {
         }
     }
 
-    public static void repos(Equipe equipe, Scanner scanner) {
-        System.out.println("Votre groupe a trouvé une zone de repos !");
-        System.out.println("Que voulez-vous faire : ");
-        System.out.println("1. Se reposer");
-        System.out.println("2. Se raconter des histoires");
-        int choix = scanner.nextInt();
-        switch(choix) {
-            case 1 -> {
-                for(Combattant i : equipe.getEquipe()) {
-                    if(i.getPVMax() < i.getPV() - 50) {
-                        i.regenererPV(50);
-                    }else {
-                        i.regenererPV(i.getPVMax() - i.getPV());
-                    }
-                }
-                System.out.println("Toute votre equipe se regenere de 50 hp !");
+    public static void repos(Equipe equipe) {
+        for(Combattant i : equipe.getEquipe()) {
+            if(i.getPvMax() < i.getPV() - 50) {
+                i.regenererPV(50);
+            }else {
+                i.regenererPV(i.getPvMax() - i.getPV());
             }
-            case 2 ->{
-                for(Combattant i : equipe.getEquipe()) {
-                    if(i.getCourageMax() < i.getCourageMax() - 50) {
-                        i.regenererCourage(30);
-                    }else {
-                        i.regenererCourage(i.getCourageMax() - i.getCourageMax());
-                    }
-                }
-                System.out.println("Toute votre equipe se regenere 50 de courage !");
-            }
+            System.out.println("Votre groupe a trouvé une zone de repos !");
+            System.out.println("Toute votre equipe se regenere de 50 hp !");
         }
-        
-        
     }
 
     public static void boucleDeJeu(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
-        while (true) {
-            
-            System.out.println("+-------------------------+");
-            System.out.println("|  1. Prochain evenement  |");
-            System.out.println("|  2. Inventaire          |");
-            System.out.println("+-------------------------+");
+        while (true) { 
+            System.out.println("1. Prochain evenement");
+            System.out.println("2. Inventaire");
             int choix = scanner.nextInt();
                 switch(choix) {
                     case 1 -> prochainEvent(scanner, equipe, inventaire);
@@ -137,7 +114,7 @@ public class JeuAlternatif {
         
     }
 
-    public static void main (String [] args) {
+    public static void lancerJeuAlternatif () {
         Scanner scanner = new Scanner(System.in);
         Equipe equipe = new Equipe();
         InventaireJoueur inventaire = new InventaireJoueur();
