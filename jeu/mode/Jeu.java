@@ -1,4 +1,4 @@
-package jeu;
+package jeu.mode;
 import java.util.*;
 
 import jeu.combattants.*;
@@ -129,15 +129,15 @@ public class Jeu {
      * @return un booléen, true si l'utilisateur entre n, false s'il entre y
      */
     public static boolean demanderQuitter(Scanner scanner) {
-        char choix;
+        String reponse = "";
         do {
             System.out.println("Voulez-vous quitter la partie ? [y/n]");
-            choix = scanner.nextLine().charAt(0);
-        }while (choix != 'y' && choix != 'n' && choix != 'Y' && choix != 'N');
-        return (choix == 'n' || choix == 'N');
+            reponse = scanner.nextLine().trim();
+        } while (reponse.isEmpty() || (!reponse.equalsIgnoreCase("y") && !reponse.equalsIgnoreCase("n")));
+        return reponse.equalsIgnoreCase("n");
     }
 
-    public static void main(String[] args) {
+    public static void lancerJeu() {
         Scanner scanner = new Scanner(System.in);
         Equipe equipe1 = new Equipe();
         Equipe equipe2 = new Equipe();
