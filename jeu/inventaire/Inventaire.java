@@ -73,11 +73,14 @@ public class Inventaire {
     
     @Override
     public String toString() {
-        String s = "+------------------------------------+ \n";
+        String s = "+-------------:--------:-------------+ \n";
+        s += "|             |        |             | \n";
+        s += "|-------------|________|-------------| \n";
+        s += "|                                    | \n";       
         for(Item i: inventaire.keySet()) {
-            s += "Item : "+i+"\t Nombre : "+inventaire.get(i)+"\n";
+            s += "| Item : "+i+"\t Nombre : "+inventaire.get(i)+"          |\n";
         }
-        s+= "Gold : "+getOr()+"\n";
+        s+= "| Gold : "+getOr()+"                         |\n";
         s+= "+------------------------------------+";
         return s;
     }

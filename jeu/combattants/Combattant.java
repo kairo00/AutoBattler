@@ -5,6 +5,7 @@ public abstract class Combattant {
 
     private final int pvMax;
     private int pv;
+    private final int courageMax;
     private int courage;
     private final int attaque;
     private final int defense;
@@ -19,6 +20,8 @@ public abstract class Combattant {
         this.attaque = attaque;
         this.defense = defense;
         this.vitesse = vitesse;
+        this.courage = courage;
+        this.courageMax = courage;
         id++;
     }
 
@@ -46,8 +49,6 @@ public abstract class Combattant {
             fuite++;
         }
         if(degat > 0) pv = Math.max(0, pv - degat);
-
-
     }
 
     public int calculerDegat(Combattant cible) {
@@ -102,6 +103,10 @@ public abstract class Combattant {
         return id;
     }
 
+    public int getCourageMax() {
+        return courageMax;
+    }
+    
     public int getCourage() {
         return courage;
     }
