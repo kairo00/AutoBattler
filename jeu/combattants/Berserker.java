@@ -12,7 +12,7 @@ public class Berserker extends Combattant{
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
 
-        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax() + "  " + adversaire.getCourage());
+        System.out.println("["+getId() + "]"+getNom() + " attaque " +"["+adversaire.getId()+"]"+adversaire.getNom()+ " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
         if(getPV() <= 80 && estEnVie()) {
             adversaire = ennemis.choisirCombattantAleatoire();
             adversaire.prendreDegat(this);

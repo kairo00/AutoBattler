@@ -29,12 +29,12 @@ public class Pretre extends Combattant{
             attaquer(ennemie);
         }
         if(random == 0 && !mort.estEnVie() && res < 1) {
-            System.out.println("Le pretre ressucite "+alliée.toString());
+            System.out.println("Le pretre ressucite "+mort.toString());
             soin(alliée);
             res++;
         }else {
             soin(alliée);
-            System.out.println("Le pretre soigne "+alliée.toString()+" de 30 pv");
+            System.out.println("Le pretre soigne "+mort.toString()+" de 30 pv");
         }
        
     }

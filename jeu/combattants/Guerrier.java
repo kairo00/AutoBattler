@@ -12,7 +12,7 @@ public class Guerrier extends Combattant{
         super.prendreDegat(cible);
         if(r < 6) {
             cible.prendreDegat(this);
-            System.out.println("BOOM CONTRE ATTAQUE");
+            System.out.println("Le guerrier riposte !");
         }
     }
 

@@ -1,14 +1,21 @@
 package jeu.mode;
 
+
 import java.util.*;
 import jeu.combattants.*;
 import jeu.gestions.*;
 import jeu.inventaire.InventaireJoueur;
 import jeu.inventaire.InventaireMarchand;
+import jeu.items.*;
+import jeu.miniboss.Graymarrow;
+import jeu.miniboss.Herald;
+import jeu.miniboss.KingSlime;
 import jeu.mobs.*;
 
 
 public class JeuAlternatif {
+
+    static int compteur = 1;
 
     public static void choixCombattant(Equipe equipe, Scanner scanner) {
         int nbCombattant;
@@ -47,38 +54,98 @@ public class JeuAlternatif {
         }
     }
 
+    public static void boss(Equipe boss) {
+        int type = (int)(3*Math.random());
+        switch(type) {
+            case 0 -> { 
+                boss.getEquipe().add(new KingSlime());
+                System.out.println("* Une pluie de slime s'abat ! *");
+            }
+            case 1 -> {
+                boss.getEquipe().add(new Graymarrow());
+                System.out.println("Graymarrow : Vous ne vous en sortirez pas vivant !");
+            }
+            case 2 -> {
+                boss.getEquipe().add(new Herald());
+                System.out.println("* Une brêche dimensionelle s'ouvre devant vous. *");
+            }
+        }
+    }
     public static void prochainEvent(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
-        
         int seed = (int)(10*Math.random());
+        
+        if(compteur == 5) {
+            Equipe boss = new Equipe();
+            boss(boss);
+            Combat arene = new Combat(equipe, boss, scanner);
+            arene.lancerCombat();
+        }else{
             if(seed < 7) {
                 Equipe mobs = new Equipe();
                 Mobs(mobs);
                 Combat arene = new Combat(equipe, mobs, scanner);
                 arene.lancerCombat();
+                if(!equipe.aDesVivants()) {
+                    System.out.println("Game Over !");
+                    System.exit(0);
+                }else{
+                    inventaire.ajoutOr((int)(80*Math.random()));
+                    System.out.println("Vous avez gagnez "+inventaire.getOr()+" d'or");
+                    tableDeButin(inventaire);
+                }
             }else{
                 if(seed < 9) {
-                    repos(equipe);
+                    repos(scanner, equipe);
                 } else {
                     InventaireMarchand inventaireMarchand = new InventaireMarchand();
                     inventaireMarchand.shopping(scanner, inventaire, equipe);
                 }
             }
         }
+        compteur++;
+    }
 
-    public static void repos(Equipe equipe) {
-        for(Combattant i : equipe.getEquipe()) {
-            if(i.getPvMax() < i.getPV() - 50) {
-                i.regenererPV(50);
-            }else {
-                i.regenererPV(i.getPvMax() - i.getPV());
+    public static void repos(Scanner scanner, Equipe equipe) {
+        System.out.println("Votre groupe a trouvé une zone de repos !");
+        System.out.println("1. Se reposer");
+        System.out.println("2. Se raconter des histoires");
+        int choix = scanner.nextInt();
+        switch(choix) {
+            case 1 -> {
+                for(Combattant i : equipe.getEquipe()) {
+                    if(i.getPvMax() < i.getPV() - 50) {
+                        i.regenererPV(50);
+                    }else {
+                        i.regenererPV(i.getPvMax() - i.getPV());
+                    }
+                }
+                System.out.println("Toute votre equipe se regenere de 50 hp !");
             }
-            System.out.println("Votre groupe a trouvé une zone de repos !");
-            System.out.println("Toute votre equipe se regenere de 50 hp !");
+            case 2 -> {
+                for(Combattant i : equipe.getEquipe()) {
+                    if(i.getCourageMax() < i.getCourage() - 50) {
+                        i.regenererCourage(50);
+                    }else {
+                        i.regenererPV(i.getCourageMax() - i.getCourage());
+                    }
+                }
+                System.out.println("Toute votre equipe se regenere 50 de courage !");
+            }
+        }
+        
+    }
+
+    public static void tableDeButin(InventaireJoueur inventaire) {
+        int porteurDeCendre = (int)(100*Math.random());
+        if(porteurDeCendre < 5) {
+            inventaire.getInventaire().put(new PorteurdeCendre(), 1);
         }
     }
 
     public static void boucleDeJeu(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
         while (true) { 
+            System.out.println("+=========================+");
+            System.out.println("|         Round "+compteur+"         |"); 
             System.out.println("+-------------------------+");
             System.out.println("|  1. Prochain evenement  |");
             System.out.println("|  2. Inventaire          |");

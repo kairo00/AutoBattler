@@ -13,12 +13,11 @@ public class Paladin extends Combattant {
 
         if(getPV() <= 190) {
             regenererPV(10);
-            System.out.println("+10pv (<= 190) pour le paladin");
         }
         if(getPV() > 190) {
             regenererPV(200-getPV());
         }
-        System.out.println(getNom() + "[Equipe " + getId() + "] a attaqué " + adversaire.getNom() + "[Equipe " + ennemis.getID() + "] et lui a infligé " + getAttaque() + " dégâts.");
+        System.out.println("["+getId() + "]"+getNom() + " attaque " +"["+adversaire.getId()+"]"+adversaire.getNom()+ " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     /**

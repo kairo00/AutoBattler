@@ -25,8 +25,15 @@ public class InventaireMarchand extends Inventaire{
             inventaireJoueur.ajoutItem(item, nombre);
             supprimeItem(item, item.toString(), nombre);
             System.out.println("Marchand : On a tous besoin d'un petit coup de boost ! ");
+        }
+        if(inventaireJoueur.getOr() >= nombre*50 && item.toString().equals("These")){
+            inventaireJoueur.soustraireOr(50);
+            ajoutOr(50);
+            inventaireJoueur.ajoutItem(item, nombre);
+            supprimeItem(item, item.toString(), nombre);
+            System.out.println("Marchand : Un choix interessant ... ");
         }else{
-            System.out.println("Marchand : T'as pas assez d'argent sale pauvre");
+            System.out.println("Marchand : T'as oublié l'argent chef");
         }
     }
 
@@ -56,8 +63,9 @@ public class InventaireMarchand extends Inventaire{
                     }else {
                         System.out.println(" Qu'est-ce qui vous ferait plaisir ?");
                     }
-                    System.out.println("1. Potions");
+                    System.out.println("1. Potion");
                     System.out.println("2. Biere");
+                    System.out.println("3. These");
                     System.out.print(joueur+" : J'aimerais une/des ~");
                     String choix1 = scanner.next();
                     System.out.print("Marchand : Tres bien mon ami ! Combien en veux-tu ? ");
@@ -71,6 +79,11 @@ public class InventaireMarchand extends Inventaire{
                         case "Biere" -> {
                             System.out.println(joueur+" : "+choixNombre+" Biere(s)");
                             item = new Biere();
+                            achatMarchand(item, inventaireJoueur, choixNombre);
+                        }
+                        case "These" -> {
+                            System.out.println(joueur+" : "+choixNombre+" These(s)");
+                            item = new These();
                             achatMarchand(item, inventaireJoueur, choixNombre);
                         }
                     }

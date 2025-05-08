@@ -1,7 +1,7 @@
 package jeu.items;
 import jeu.gestions.Equipe;
 
-public class Item {
+public abstract class Item {
     String nom;
     String type;
     int valeur;
@@ -12,8 +12,7 @@ public class Item {
         this.valeur = valeur;
     }
 
-    public void effet(Equipe equipe) {
-    }
+    public abstract void effet(Equipe equipe);
 
     @Override
     public String toString() {

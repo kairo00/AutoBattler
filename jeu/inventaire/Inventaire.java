@@ -3,6 +3,7 @@ import java.util.*;
 import jeu.gestions.Equipe;
 import jeu.items.Item;
 
+
 public class Inventaire {
 
     private int or = 0;
@@ -28,17 +29,17 @@ public class Inventaire {
     }
 
     public void ajoutItem(Item item, int nombre) {
+        
         for(Item i : inventaire.keySet()) {
             if(i.toString().equals(item.toString())) {
                 int nombreActuel = inventaire.get(i)+nombre;
                 inventaire.remove(i);
                 inventaire.put(item, nombreActuel);
-                if(nombreActuel < 1) {
-                    inventaire.remove(i);
-                }
+                
             }
         }
     }
+    
 
 
     public boolean supprimeItem(Item item, String nom, int nombre) {
@@ -47,9 +48,6 @@ public class Inventaire {
                 int nombreActuel = inventaire.get(i)-nombre;
                 inventaire.remove(i);
                 inventaire.put(item, nombreActuel);
-                if(nombreActuel < 1) {
-                    inventaire.remove(i);
-                }
                 return true;
             }else{
                 System.out.println("Vous ne possedez pas l'item");

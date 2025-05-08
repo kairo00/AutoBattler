@@ -12,7 +12,7 @@ public class Mage extends Combattant {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         System.out.println(adversaire.getPV());
         adversaire.prendreDegat(this);
-        System.out.println(adversaire.getNom()+" degat subit: "+getAttaque()+" pv: "+adversaire.getPV()+"/200");
+        System.out.println("["+getId() + "]"+getNom() + " attaque " +"["+adversaire.getId()+"]"+adversaire.getNom()+ " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     @Override

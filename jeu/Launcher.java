@@ -1,7 +1,6 @@
 package jeu;
-import jeu.mode.*;
-
 import java.util.Scanner;
+import jeu.mode.*;
 
 public class Launcher {
     public static void main(String[] args) {
@@ -15,13 +14,16 @@ public class Launcher {
         System.out.print("Choix : ");
         int choix = scanner.nextInt();
         scanner.nextLine(); // pour vider la ligne
-
-        if (choix == 1) {
-            Jeu.lancerJeu(); // appel du jeu classique
-        } else if (choix == 2) {
-            JeuAlternatif.lancerJeuAlternatif();// appel du jeu alternatif
-        } else {
-            System.out.println("Choix invalide.");
+        switch (choix) {
+            case 1 -> Jeu.lancerJeu(); // appel du jeu classique
+            case 2 -> JeuAlternatif.lancerJeuAlternatif();// appel du jeu alternatif
+            case 3 -> {
+                jeu.Wiki wiki = new Wiki();
+                wiki.activeWiki();
+            }
+            default -> {
+                System.out.println("Choix invalide.");
+            }
         }
         scanner.close();
     }

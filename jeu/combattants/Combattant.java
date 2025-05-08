@@ -11,7 +11,8 @@ public abstract class Combattant {
     private final int defense;
     private final int vitesse;
     private int fuite = 0;
-    public static int id;
+    private final int idPerso;
+    public static int id = 0;
     private Combattant cible;
 
     public Combattant(int pvMax, int attaque, int defense, int vitesse, int courage){
@@ -22,7 +23,7 @@ public abstract class Combattant {
         this.vitesse = vitesse;
         this.courage = courage;
         this.courageMax = courage;
-        id++;
+        idPerso = id++;
     }
 
     public void cibleAdverse(Equipe equipe) {
@@ -36,7 +37,7 @@ public abstract class Combattant {
     public void attaquer(Equipe ennemis) {
         Combattant adversaire = ennemis.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
-        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
+        System.out.println("["+getId() + "]"+getNom() + " attaque " +"["+adversaire.getId()+"]"+adversaire.getNom()+ " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     public void prendreDegat(Combattant attaquant) {
@@ -113,7 +114,7 @@ public abstract class Combattant {
     }
 
     public int getId() {
-        return id;
+        return idPerso;
     }
 
     public int getCourageMax() {

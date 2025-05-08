@@ -39,7 +39,7 @@ public class Combat {
         while(equipe_1.aDesVivants() && equipe_2.aDesVivants() && continuer) {
             lancerManche();
         }
-        System.out.println(ecranVictoire()+"\n Appuyer sur n'importe quelles touches pour quitter.");
+        System.out.println(ecranVictoire()+"\n");
         cpt_manche=1;
     }
 
@@ -48,7 +48,8 @@ public class Combat {
      * Les combattants jouent tour a tour tant qu'ils sont en vie, la manche s'arête lorsque tout les combattants ont joué ou qu'une des deux équipes n'a plus de combattants vivants.
      */
     private void lancerManche() {
-        System.out.println("Manche "+cpt_manche);
+        System.out.println("             Manche "+cpt_manche);
+        System.out.println("====================================");
 
             ArrayList<Combattant> attaquantTri = new ArrayList<>();
             for (Combattant c : equipe_1.getEquipe()) {
@@ -87,11 +88,11 @@ public class Combat {
         String str = "";
         str += "======[Resulat de la manche "+ (cpt_manche) + "]======\nEquipe 1:\n";
         for(Combattant c : equipe_1.getEquipe()) {
-            str += c.toString()+" "+c.estEnVie()+"\n";
+            str += c.toString()+"\n";
         }
         str += "\nEquipe 2:\n";
         for(Combattant c : equipe_2.getEquipe()) {
-            str += c.toString()+" "+c.estEnVie()+c.getVitesse()+"\n";
+            str += c.toString()+"\n";
         }
         return str;
     }
