@@ -1,0 +1,33 @@
+package src.entitees.combattants;
+import src.entitees.Combattant;
+import src.jeu.gestions.Equipe;
+
+public class Berserker extends Combattant{
+   
+    public Berserker() {
+        super(220, 55, 10, 50, 120);
+    }
+
+    @Override
+    public void attaquer(Equipe ennemis) {
+        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        adversaire.prendreDegat(this);
+
+        System.out.println(adversaire.getNom() + "[Equipe " + ennemis.getID() + "] a subit une attaque de " + getNom() + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax() + "  " + adversaire.getCourage());
+        if(getPV() <= 80 && estEnVie() && ennemis.aDesVivants()) {
+            adversaire = ennemis.choisirCombattantAleatoire();
+            adversaire.prendreDegat(this);
+            System.out.println("Attaque suplémentaire du Berserker !");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "B["+getPV()+" /"+getPvMax()+"]";
+    }
+
+    @Override
+    public String getNom() {
+        return "Berseker";
+    }
+}
