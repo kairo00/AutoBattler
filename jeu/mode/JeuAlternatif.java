@@ -2,6 +2,10 @@ package jeu.mode;
 
 
 import java.util.*;
+import jeu.boss.Monika;
+import jeu.boss.Nashor;
+import jeu.boss.Ragnaros;
+import jeu.boss.Sanguinius;
 import jeu.combattants.*;
 import jeu.gestions.*;
 import jeu.inventaire.InventaireJoueur;
@@ -54,7 +58,7 @@ public class JeuAlternatif {
         }
     }
 
-    public static void boss(Equipe boss) {
+    public static void miniBoss(Equipe boss) {
         int type = (int)(3*Math.random());
         switch(type) {
             case 0 -> { 
@@ -71,38 +75,68 @@ public class JeuAlternatif {
             }
         }
     }
+
+    public static void boss(Equipe boss) {
+        int type = (int)(3*Math.random());
+        switch(type) {
+            case 0 -> { 
+                boss.getEquipe().add(new Monika());
+                System.out.println("Monika : ... Tu tentes de passer ?");
+            }
+            case 1 -> {
+                boss.getEquipe().add(new Nashor());
+                System.out.println("* Une enorme faille dimensionelle s'ouvre devant vous *");
+            }
+            case 2 -> {
+                boss.getEquipe().add(new Ragnaros());
+                System.out.println("Ragnaros : PAR LE FEU SOYEZ PURIFIÉ");
+            }
+
+            case 3 -> {
+                boss.getEquipe().add(new Sanguinius());
+                System.out.println("Sanguinius : Je ne veux pas être ici");
+            }
+        }
+    }
     public static void prochainEvent(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
         int seed = (int)(10*Math.random());
-        
-        if(compteur == 5) {
+        if(compteur%10 == 0) {
             Equipe boss = new Equipe();
             boss(boss);
             Combat arene = new Combat(equipe, boss, scanner);
             arene.lancerCombat();
         }else{
-            if(seed < 7) {
-                Equipe mobs = new Equipe();
-                Mobs(mobs);
-                Combat arene = new Combat(equipe, mobs, scanner);
+            if(compteur%5 == 0) {
+                Equipe boss = new Equipe();
+                miniBoss(boss);
+                Combat arene = new Combat(equipe, boss, scanner);
                 arene.lancerCombat();
-                if(!equipe.aDesVivants()) {
-                    System.out.println("Game Over !");
-                    System.exit(0);
-                }else{
-                    inventaire.ajoutOr((int)(80*Math.random()));
-                    System.out.println("Vous avez gagnez "+inventaire.getOr()+" d'or");
-                    tableDeButin(inventaire);
-                }
             }else{
-                if(seed < 9) {
-                    repos(scanner, equipe);
-                } else {
-                    InventaireMarchand inventaireMarchand = new InventaireMarchand();
-                    inventaireMarchand.shopping(scanner, inventaire, equipe);
+                if(seed < 7) {
+                    Equipe mobs = new Equipe();
+                    Mobs(mobs);
+                    Combat arene = new Combat(equipe, mobs, scanner);
+                    arene.lancerCombat();
+                    if(!equipe.aDesVivants()) {
+                        System.out.println("Game Over !");
+                        System.exit(0);
+                    }else{
+                        int or = (int)(80*Math.random());
+                        inventaire.ajoutOr(or);
+                        System.out.println("Vous avez gagnez "+or+" d'or");
+                        tableDeButin(inventaire);
+                    }
+                }else{
+                    if(seed < 9) {
+                        repos(scanner, equipe);
+                    } else {
+                        InventaireMarchand inventaireMarchand = new InventaireMarchand();
+                        inventaireMarchand.shopping(scanner, inventaire, equipe);
+                    }
                 }
             }
+            compteur++;
         }
-        compteur++;
     }
 
     public static void repos(Scanner scanner, Equipe equipe) {

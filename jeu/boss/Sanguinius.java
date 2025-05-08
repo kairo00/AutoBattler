@@ -3,8 +3,8 @@ package jeu.boss;
 import jeu.combattants.Combattant;
 import jeu.gestions.Equipe;
 
-public class Nashor extends Combattant{
-    public Nashor() {
+public class Sanguinius extends Combattant{
+    public Sanguinius() {
         super(1600, 45, 20, 30, 3000);
     }
 
@@ -20,12 +20,13 @@ public class Nashor extends Combattant{
 
     @Override
     public String toString() {
-        return "Nashor ["+getPV()+" / 1600]";
+        return "Tiamat ["+getPV()+" / 1600]";
     }
 
     @Override
     public String getNom() {
-        return "Nashor";
+        return "Tiamat";
     } 
+    
     
 }
