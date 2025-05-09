@@ -3,9 +3,8 @@ package src.entitees.boss;
 import src.entitees.Combattant;
 import src.jeu.gestions.*;
 
-public class Monika extends Combattant {
-
-    public Monika() {
+public class Sanguinius extends Combattant{
+    public Sanguinius() {
         super(1600, 45, 20, 30, 3000);
     }
 
@@ -21,12 +20,12 @@ public class Monika extends Combattant {
 
     @Override
     public String toString() {
-        return "Monika["+getPV()+"/"+getPvMax()+"]";
+        return "Tiamat["+getPV()+"/"+getPvMax()+"]";
     }
 
     @Override
     public String getNom() {
-        return "Monika";
+        return "Tiamat";
     } 
     
     

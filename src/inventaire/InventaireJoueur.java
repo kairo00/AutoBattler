@@ -8,7 +8,7 @@ public class InventaireJoueur extends Inventaire {
     }
 
     public void venteJoueur(Item item, int nombre) {
-        if(supprimeItem(item, nombre)) ajoutOr(item.getValeur()*nombre);
+        if(supprimeItem(item, nombre)) ajoutOr(item.getValeurRevente()*nombre);
     }
     
     @Override

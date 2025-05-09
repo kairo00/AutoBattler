@@ -13,9 +13,12 @@ public class UtilitaireJeu {
     public static int saisieMenu(Scanner scanner, int min, int max) {
         int choix;
         do {
-            System.out.println("Choix ?");
+            System.out.print("[Saisie]: ");
             choix = scanner.nextInt();
+            scanner.nextLine();
         }while(choix < min || choix > max);
         return choix;
     }
+
+
 }

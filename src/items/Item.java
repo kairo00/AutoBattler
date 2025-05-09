@@ -1,15 +1,17 @@
 package src.items;
 import src.jeu.gestions.Equipe;
+import java.util.List;
 
 public class Item {
     private String nom;
     private String type;
-    private int valeur;
+    private int valeurRevente, valeurVente;
 
-    Item(String nom, String type, int valeur) {
+    Item(String nom, String type, int valeurVente, int valeurRevente) {
         this.nom = nom;
         this.type = type;
-        this.valeur = valeur;
+        this.valeurVente = valeurVente;
+        this.valeurRevente = valeurRevente;
     }
 
     public void effet(Equipe equipe) {
@@ -33,8 +35,20 @@ public class Item {
         return nom;
     }
 
-    public int getValeur() {
-        return valeur;
+    public static List<Item> getItemsDisponibles() {
+        return List.of(
+            new Potion(),
+            new Biere(),
+            new These()
+        );
+    }
+
+    public int getValeurRevente() {
+        return valeurRevente;
+    }
+    
+    public int getValeurVente() {
+        return valeurVente;
     }
 
     public String getNom() {

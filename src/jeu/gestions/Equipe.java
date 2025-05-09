@@ -67,6 +67,15 @@ public class Equipe {
         return equipe;
     }
 
+    @Override
+    public String toString() {
+        String equipe = "";
+        for(Combattant c : this.equipe) {
+            equipe += c.getNom()+" "+c.toString()+"\n";
+        }
+        return equipe;
+    }
+
     public void ajouterCombattant(Combattant c) {
         if(c != null) equipe.add(c);
     }

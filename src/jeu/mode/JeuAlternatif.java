@@ -41,7 +41,7 @@ public class JeuAlternatif {
             System.out.println("|  3. Voir équipe         |");
             System.out.println("|  4. Quitter             |");
             System.out.println("+-------------------------+");
-            int choix = scanner.nextInt();
+            int choix = UtilitaireJeu.saisieMenu(scanner, 1, 4);
                 switch(choix) {
                     case 1 -> {
                         event.prochainEvent();
@@ -53,10 +53,11 @@ public class JeuAlternatif {
                         scanner.nextLine();
                         String choixNom = scanner.nextLine();
                         if(choixNom.isEmpty()) break;
-                        boolean use = inventaire.utiliserItemNom(choixNom, equipe);
-                        if(!use) System.out.println("Cet item n'est pas dans votre inventaire.");
+                        boolean utiliser = inventaire.utiliserItemNom(choixNom, equipe);
+                        if(!utiliser) System.out.println("Cet item n'est pas dans votre inventaire.");
                     }
-                    case 3 -> Launcher.main(null);
+                    case 3 -> System.out.println(equipe.toString());
+                    case 4 -> Launcher.main(null);
                 }
             System.out.println("");
         }
@@ -70,7 +71,6 @@ public class JeuAlternatif {
         inventaire.starterKit();
 
         choixCombattant(equipe, scanner);
-        System.out.println(equipe.toString());
         boucleDeJeu(scanner, equipe, inventaire);
 
     }

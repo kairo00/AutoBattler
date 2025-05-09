@@ -43,16 +43,6 @@ public class Inventaire {
         if (inventaire.get(item) < 1) {
             inventaire.remove(item);
         }
-/*         for(Item i : inventaire.keySet()) {
-            if(i.toString().equals(item.toString())) {
-                int nombreActuel = inventaire.get(i)+nombre;
-                inventaire.remove(i);
-                inventaire.put(item, nombreActuel);
-                if(nombreActuel < 1) {
-                    inventaire.remove(i);
-                }
-            }
-        } */
     }
 
 

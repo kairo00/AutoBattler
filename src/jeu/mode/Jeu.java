@@ -65,7 +65,7 @@ public class Jeu {
         String [] combattantHasard = {combattants.get(0), combattants.get(1), combattants.get(2)};
 
         /* Affichage des 3 combattants. */
-        System.out.println("\n\nChoix pour l'équipe "+equipe.getID());
+        System.out.println("\nChoix pour l'équipe "+equipe.getID());
         System.out.println("Choisi parmis les combattants suivant:");
         for(int i = 0; i<3;i++) {
             System.out.println((i+1)+". "+combattantHasard[i]);
@@ -84,11 +84,20 @@ public class Jeu {
      * @param equipe qui doti etre constituée (ordinateur)
      */
     public static void choixCombattantOrdi(Equipe equipe) {
+
         List<String> combattants = GenCombattant.genNomCombattants();
-        int r = (int) (Math.random()*combattants.size());
-        Combattant c = GenCombattant.genererParNom(combattants.get(r));
+        Collections.shuffle(combattants);
+
+        /* Tableau contenant les combattants tirés au hasard */
+        String [] combattantHasard = {combattants.get(0), combattants.get(1), combattants.get(2)};
+        int r = (int) (Math.random()*combattantHasard.length);
+        /* Affichage des 3 combattants. */
+        System.out.println("\n[🤖] Le robot à choisi parmis les combattants suivant:");
+        for(int i = 0; i<3;i++) {
+            System.out.println((i+1)+". "+combattantHasard[i]);
+        }
+        Combattant c = GenCombattant.genererParNom(combattantHasard[r]);
         equipe.ajouterCombattant(c);
-        System.out.println("[🤖] À choisi "+c.toString());
     }
 
     /**
@@ -153,8 +162,8 @@ public class Jeu {
                 equipe1.getEquipe().clear();
                 equipe2.getEquipe().clear();
                 for(int i = 0;i<(TEAM_SIZE*2);i++) {
-                    if(i%2==0) choixCombattantPvp(equipe1, scanner);
-                    else choixCombattantOrdi(equipe2);
+                    if(i%2==0) choixCombattantOrdi(equipe2);
+                    else choixCombattantPvp(equipe1, scanner);
                 }
                 partieLance=true;
                 while(partieLance) {

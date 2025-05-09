@@ -7,7 +7,7 @@ public class Biere extends Item{
     final int regenerePeur = 50;
 
     public Biere() {
-        super("Biere", "Consumable", 50);
+        super("Biere", "Consumable", 50, 25);
     }
     
     @Override

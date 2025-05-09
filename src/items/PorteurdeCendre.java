@@ -5,7 +5,7 @@ import src.jeu.gestions.*;
 public class PorteurdeCendre extends Item{
 
     public PorteurdeCendre() {
-        super("PorteurdeCendre", "Equipement", 250);
+        super("PorteurdeCendre", "Equipement", 250, 125);
     }
 
     @Override

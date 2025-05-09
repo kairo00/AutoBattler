@@ -6,7 +6,7 @@ public class Potion extends Item {
 
     private final int ajoutePv = 40;
     public Potion() {
-        super("Potion", "Consummable", 50);
+        super("Potion", "Consummable", 50, 25);
     }
 
     @Override
