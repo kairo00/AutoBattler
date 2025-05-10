@@ -34,6 +34,7 @@ public class Equipe {
      * @return un combattant
      */
     public Combattant choisirCombattantAleatoire() {
+        if(!aDesVivants()) return null;
         int indexHasard;
         do {
             indexHasard = (int) (Math.random()*equipe.size());
@@ -61,12 +62,7 @@ public class Equipe {
         }
         return false;
     }
-
-    /* Getteurs */
-    public List<Combattant> getEquipe() {
-        return equipe;
-    }
-
+    
     @Override
     public String toString() {
         String equipe = "";
@@ -78,6 +74,11 @@ public class Equipe {
 
     public void ajouterCombattant(Combattant c) {
         if(c != null) equipe.add(c);
+    }
+
+    /* Getteurs */
+    public List<Combattant> getEquipe() {
+        return equipe;
     }
 
     public int getID() {

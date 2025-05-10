@@ -73,7 +73,6 @@ public class Jeu {
 
         /* Saisie du choix de l'utilisateur */
         int choix = UtilitaireJeu.saisieMenu(scanner, 1, 3);
-        scanner.nextLine();
 
         /* Ajoute le bon membre de l'équipe selon le choix d'utilisateur */
         equipe.ajouterCombattant(GenCombattant.genererParNom(combattantHasard[choix-1]));
@@ -118,7 +117,7 @@ public class Jeu {
         Scanner scanner = new Scanner(System.in);
         Equipe equipe1 = new Equipe();
         Equipe equipe2 = new Equipe();
-        Combat arene = new Combat(equipe1, equipe2, scanner);
+        Combat arene = new Combat(equipe1, equipe2);
 
         final int TEST=1, PVP=2, PVE=3, QUITTER=4, TEAM_SIZE=5;
         boolean partieLance;

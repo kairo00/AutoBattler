@@ -11,11 +11,16 @@ public class UtilitaireJeu {
      * @return l'entier correspondant au choix de l'utilisateur
      */
     public static int saisieMenu(Scanner scanner, int min, int max) {
-        int choix;
+        int choix=-1;
         do {
-            System.out.print("[Saisie]: ");
-            choix = scanner.nextInt();
-            scanner.nextLine();
+            if (scanner.hasNextInt()) {
+                choix = scanner.nextInt();
+                scanner.nextLine(); // Consommer le '\n' restant après nextInt()
+            } else {
+                scanner.nextLine(); // Consommer l'entrée invalide si c'est un texte
+                System.out.println("Veuillez entrer un nombre valide.");
+                continue;
+            }
         }while(choix < min || choix > max);
         return choix;
     }
