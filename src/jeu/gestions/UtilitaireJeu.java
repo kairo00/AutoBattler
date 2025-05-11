@@ -26,7 +26,7 @@ public class UtilitaireJeu {
                 scanner.nextLine(); 
             } else {
                 scanner.nextLine(); 
-                System.out.println("Veuillez entrer un nombre valide.");
+                System.out.println("Erreur: Seul les nombres entiers sont autorisés.");
                 continue;
             }
         }while(choix < min || choix > max);
