@@ -34,7 +34,7 @@ public abstract class Combattant {
      * @param vitesse vitesse du combattant
      * @param courageMax courage max du combattant 
      */
-    public Combattant(int pvMax, int attaque, int defense, int vitesse, int courageMax){
+    public Combattant(int pvMax, int attaque, int defense, int vitesse, int courageMax) {
         this.pv = pvMax;
         this.pvMax = pvMax;
         this.attaque = attaque;
@@ -50,20 +50,20 @@ public abstract class Combattant {
      * @param ennemie cible choisie parmis les combattants adverses
      * @param alliée cible choisie parmis les combattants alliés
      */
-    public void action(Equipe ennemie, Equipe alliée) {
-        attaquer(ennemie);
+    public void action(Equipe ennemie, Equipe alliee) {
+        attaquer(ennemie, alliee);
     }
 
     /**
      * Attaque un combattant ennemi
      * @param ennemie cible choisie parmis les combattants adverses
      */
-    public void attaquer(Equipe ennemie) {
+    public void attaquer(Equipe ennemie, Equipe alliee) {
         //Selection d'un combattant aléatoire, l'adversaire prend des dégâts
         Combattant adversaire = ennemie.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
         //Affichage des dégâts infligés ainsi que la vie de l'ennemi touché
-        System.out.println(getNom() + "["+getId() + "] attaque " + adversaire.getNom()+"["+adversaire.getId()+"]" + " lui infligeant " + Math.max(0, getAttaque()-adversaire.getDefense()) + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
+        System.out.println("🗡️  " + getNom() + "[Equipe " + alliee.getID() + "] attaque " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
    /**
@@ -75,13 +75,19 @@ public abstract class Combattant {
         int r = (int)(3*Math.random());
 
         //Si le combattant esquive ou si la defense du combattant est superieur a l'attaque de l'adversaire le combattant adverse ne subit pas de dégâts
-        if (activerEsquive() || (attaquant.getAttaque() <= getDefense())) {
+        if (activerEsquive()) {
+            System.out.println("🛡️ Le "+getNom()+" esquive !");
             return;
         }
+        if (defense >= attaquant.getAttaque()) {
+            System.out.println("🛡️ Le "+getNom()+" bloque l'attaque !");
+            return;
+        }
+        
         int degat = attaquant.calculerDegat(this);
         //Reduction du courage, si le tirage = 1 alors le combattant prend la fuite
         soustraireCourage(10);
-        if(courage==0 && r == 1) {
+        if(courage<=0 && r == 1) {
             fuite++;
         }
         //Reduction des pv du combattant
@@ -121,7 +127,7 @@ public abstract class Combattant {
      * @param courage que le combattant va régénérer
      */
     public void soustraireCourage(int courage) {
-         if(estEnVie())this.courage -= courage;
+    if (estEnVie()) this.courage -= courage;
     }
 
     /**
@@ -131,7 +137,6 @@ public abstract class Combattant {
     public boolean activerEsquive() {
         int r = (int)(21*Math.random());
         if(r == 1) {
-            System.out.println("Le "+getNom()+" esquive !");
             return true;
         }
         return false;

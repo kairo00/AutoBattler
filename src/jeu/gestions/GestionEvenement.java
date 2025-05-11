@@ -1,5 +1,4 @@
 package src.jeu.gestions;
-import java.util.*;
 
 import src.Launcher;
 import src.entitees.Combattant;
@@ -25,10 +24,10 @@ import src.items.These;
  * Cette classe gère les événements du jeu.
  * Elle permet de générer des mobs, des mini-boss, des boss, de gérer les événements de repos, de marchand et de butin.
  * @author Johan Geyer
+ * @author Hugo Marion
  * @version 1.0
  */
 public class GestionEvenement {
-    private Scanner scanner;
     private Equipe equipe;
     private InventaireJoueur inventaire;
 
@@ -36,12 +35,10 @@ public class GestionEvenement {
 
     /**
      * Gère les différents evenements possibles
-     * @param scanner permet de lire la saisie
      * @param equipe du joueur
      * @param inventaire du joueur
      */
-    public GestionEvenement(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
-        this.scanner = scanner;
+    public GestionEvenement(Equipe equipe, InventaireJoueur inventaire) {
         this.equipe = equipe;
         this.inventaire = inventaire;
     }
@@ -117,9 +114,9 @@ public class GestionEvenement {
      */
     public void evenementRepos() {
         System.out.println("Votre groupe a trouvé une zone de repos !");
-        System.out.println("1. Se reposer");
-        System.out.println("2. Se raconter des histoires");
-        int choix = scanner.nextInt();
+        System.out.println("1. Se reposer et se soigner");
+        System.out.println("2. Se raconter des histoires et regagner du courage");
+        int choix = UtilitaireJeu.scanner.nextInt();
         switch(choix) {
             case 1 -> {
                 for(Combattant i : equipe.getEquipe()) {
@@ -129,7 +126,7 @@ public class GestionEvenement {
                         i.regenererPV(i.getPvMax() - i.getPV());
                     }
                 }
-                System.out.println("Toute votre equipe se regenere de 50 hp !");
+                System.out.println("Toute votre equipe se regenere de 50 hp !💞");
             }
             case 2 -> {
                 for(Combattant i : equipe.getEquipe()) {
@@ -139,7 +136,7 @@ public class GestionEvenement {
                         i.regenererCourage(i.getCourageMax() - i.getCourage());
                     }
                 }
-                System.out.println("Toute votre equipe se regenere 50 de courage !");
+                System.out.println("Toute votre equipe se regenere 50 de courage !⚡️");
             }
         }
         
@@ -168,7 +165,7 @@ public class GestionEvenement {
             System.out.println("4. Quitter");
 
              //Le joueur saisie l'action qu'il veut réaliser
-            int choix = UtilitaireJeu.saisieMenu(scanner, 1, 4);
+            int choix = UtilitaireJeu.saisieMenu(1, 4);
             switch(choix) {
 
                 //Option 1: Achat aupres du marchand
@@ -186,10 +183,11 @@ public class GestionEvenement {
                     System.out.println(">>> Votre solde : "+inventaire.getOr()+" d'or");
                                         //Le joueur tape le nom de l'item qu'il veut obtenir
                     System.out.print(joueur+" : J'aimerais une/des ~");
-                    String choix1 = scanner.next();
+                    String choix1 = UtilitaireJeu.scanner.nextLine();
                      //Le joueur tape le nombre d'item qu'il veut obtenir
                     System.out.print("Marchand : Tres bien mon ami ! Combien en veux-tu ? ");
-                    int choixNombre = scanner.nextInt();
+                    int choixNombre = UtilitaireJeu.scanner.nextInt();
+                    UtilitaireJeu.scanner.nextLine();
                     // En fonction de son choix, un dialogue apparaît et le joueur obtient le nombre d'items demandé
                     switch(choix1.toLowerCase()) {
                         case "potion" -> {
@@ -224,10 +222,11 @@ public class GestionEvenement {
                         System.out.println("Item: "+i.getNom()+"\t Nombre : "+inventaire.getInventaire().get(i)+"\t Prix de vente : "+i.getValeurRevente());
                     }
                      //Le joueur tape le nom de l'item à vendre
-                    String choix3 = scanner.next();
+                    String choix3 = UtilitaireJeu.scanner.nextLine();
                     //le joueur tape le nombre d'item à vendre
                     System.out.println("- Combien peux tu m'en fournir ? ");
-                    int choixNombre = scanner.nextInt();
+                    int choixNombre = UtilitaireJeu.scanner.nextInt();
+                    UtilitaireJeu.scanner.nextLine();
                     //Vend l'item choisi
                     switch(choix3.toLowerCase()) {
                         case "potion" -> { 
@@ -275,7 +274,7 @@ public class GestionEvenement {
     /**
      * Gère les différents évènements possibles
      */
-    public void prochainEvent() {
+    public void prochainEvenement() {
         //Tirage pour définir le prochain évènement
         int seed = (int)(10*Math.random());
         //Si la manche est un multiple de 10 alors un boss apparait et un combat se lance
@@ -328,7 +327,7 @@ public class GestionEvenement {
     private void arreterJeu() {
             System.out.println("Votre équipe a été vaincue !");
             System.out.println("[ENTRER] Revenir au menu principal");
-            String choix = scanner.nextLine();
+            UtilitaireJeu.scanner.nextLine();
             Launcher.main(null);
             return;
     }

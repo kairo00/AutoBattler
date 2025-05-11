@@ -1,7 +1,5 @@
 package src.jeu.mode;
 
-import java.util.*;
-
 import src.Launcher;
 import src.entitees.*;
 /* import src.entitees.boss.*; */
@@ -19,18 +17,19 @@ public class JeuAlternatif {
      /**
      * Demande à l'utilisateur le nombre de chaque type de combattants qu'il veut dans sont équipe.
      * @param equipe qui doit être constituée
-     * @param scanner permettant la saisie utilisateur
      */
-    public static void choixCombattant(Equipe equipe, Scanner scanner) {
+    public static void choixCombattant(Equipe equipe) {
         int nbCombattant;
         System.out.println("Veuillez choisir vos combattants (Max 4)");
         GenCombattant.afficherMenuAlt();
         for(int i = 4; i > 0; i--) {
-            nbCombattant = scanner.nextInt();
+            nbCombattant = UtilitaireJeu.scanner.nextInt();
+            UtilitaireJeu.scanner.nextLine();
             while(nbCombattant < 1 || nbCombattant > GenCombattant.getNbCombattants()) {
                 System.out.println("Erreur : Aucun combattant ne correspond !");
                 System.out.print("Nouveau choix ~ ");
-                nbCombattant= scanner.nextInt();
+                nbCombattant= UtilitaireJeu.scanner.nextInt();
+                UtilitaireJeu.scanner.nextLine();
             }
             Combattant c = GenCombattant.generer(nbCombattant);
             equipe.ajouterCombattant(c);
@@ -40,12 +39,11 @@ public class JeuAlternatif {
     
     /**
      * Boucle de jeu, le joueur choisit la prochaine actions qu'il va effectué entre chaque manches
-     * @param scanner permettant la saisie utilisateur
      * @param equipe équipe du joueur
      * @param inventaire inventaire du joueur
      */
-    public static void boucleDeJeu(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) {
-        GestionEvenement event = new GestionEvenement(scanner, equipe, inventaire);
+    public static void boucleDeJeu(Equipe equipe, InventaireJoueur inventaire) {
+        GestionEvenement event = new GestionEvenement(equipe, inventaire);
         while (true) { 
             System.out.println("+=========================+");
             System.out.println("|         Round "+event.getCompteur()+"         |"); 
@@ -55,11 +53,11 @@ public class JeuAlternatif {
             System.out.println("|  3. Voir équipe         |");
             System.out.println("|  4. Quitter             |");
             System.out.println("+-------------------------+");
-            int choix = UtilitaireJeu.saisieMenu(scanner, 1, 4);
+            int choix = UtilitaireJeu.saisieMenu(1, 4);
                 switch(choix) {
                     //Option 1 : prochain event
                     case 1 -> {
-                        event.prochainEvent();
+                        event.prochainEvenement();
                         if(!equipe.aDesVivants()) break;
                     //Option 2 : Ouverture de l'inventaire
                     }
@@ -67,7 +65,7 @@ public class JeuAlternatif {
                         System.out.println(inventaire.toString());
                         //Si le joueur veut consommer un item il doit taper son nom 
                         System.out.print("[ENTRER] pour quitter\nQuel consommable voulez-vous utiliser ?");
-                        String choixNom = scanner.nextLine();
+                        String choixNom = UtilitaireJeu.scanner.nextLine();
                         if(choixNom.isEmpty()) break;
                         //Utilise l'item choisi si disponible
                         boolean utiliser = inventaire.utiliserItemNom(choixNom, equipe);
@@ -87,13 +85,12 @@ public class JeuAlternatif {
      * Méthode statique qui lance le jeu alternatif.
      */
     public static void lancerJeuAlternatif () {
-        Scanner scanner = new Scanner(System.in);
         Equipe equipe = new Equipe();
         InventaireJoueur inventaire = new InventaireJoueur();
         inventaire.starterKit();
 
-        choixCombattant(equipe, scanner);
-        boucleDeJeu(scanner, equipe, inventaire);
+        choixCombattant(equipe);
+        boucleDeJeu(equipe, inventaire);
 
     }
 }

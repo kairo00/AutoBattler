@@ -1,0 +1,11 @@
+src
+src.entitees
+src.entitees.boss
+src.entitees.combattants
+src.entitees.miniboss
+src.entitees.mobs
+src.inventaire
+src.items
+src.jeu.comparateurs
+src.jeu.gestions
+src.jeu.mode

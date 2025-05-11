@@ -21,12 +21,13 @@ public class Archer extends Combattant {
 
     /**
      * L'archer attaque le combattant le plus faible de l'équipe adverse
-     * @param ennemis cible choisie parmis les combattant
+     * @param ennemie cible choisie parmis les combattant
      */
     @Override
-    public void attaquer(Equipe ennemis) {
-        Combattant adversaire = ennemis.choisirCombattantFaible();
+    public void attaquer(Equipe ennemie, Equipe alliee) {
+        Combattant adversaire = ennemie.choisirCombattantFaible();
         adversaire.prendreDegat(this);
+        System.out.println("🗡️  " + getNom() + "[Equipe " + alliee.getID() + "] attaque " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     @Override

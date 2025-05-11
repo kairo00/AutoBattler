@@ -21,21 +21,21 @@ public class Herald extends Combattant{
 
     /**
      * Les mini-boss attaquent 2 fois
-     * @param ennemis que le mini-boss va attaquer
+     * @param ennemie que le mini-boss va attaquer
      */
     @Override
-    public void attaquer(Equipe ennemis) {
-        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+    public void attaquer(Equipe ennemie, Equipe alliee) {
+        Combattant adversaire = ennemie.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
         adversaire.prendreDegat(this);
-        System.out.println(getNom() + "[id : "+getId() + "] attaque " + adversaire.getNom()+"["+adversaire.getId()+"]" + " lui infligeant " + getAttaque() + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
+         System.out.println("🗡️ [Mini Boss] " + getNom() + "[Equipe " + alliee.getID() + "] attaque " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
         @Override
     public String toString() {
         return "Herald ["+getPV()+" /"+getPvMax()+"]";
     }
-    
+
     @Override
     public String getNom() {
         return "Herald";

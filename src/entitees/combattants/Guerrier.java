@@ -29,10 +29,10 @@ public class Guerrier extends Combattant{
         int r = (int)(Math.random()*10);
         super.prendreDegat(cible);
         //Si le tirage est inferieur à 6 le guerrier effectue une contre-attaque
-        if(r < 6) {
+        if(r < 6 && estEnVie() && cible.estEnVie()) {
             cible.prendreDegat(this);
             //Affichage de la contre-attaque et des dégâts infligés
-            System.out.println("Le Guerrier ["+getId()+"] contre-attaque et inflige "+Math.max(0, getAttaque()-cible.getDefense())+" de dégats à "+cible.getNom()+" || pv : "+cible.getPV()+"/"+getPvMax());
+            System.out.println("🛡️ [Capacité special] Le Guerrier contre-attaque et inflige "+Math.max(0, getAttaque()-cible.getDefense())+" de dégats à "+cible.getNom()+" || pv : "+cible.getPV()+"/"+getPvMax());
         }
     }
 

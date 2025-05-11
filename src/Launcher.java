@@ -1,5 +1,4 @@
 package src;
-import java.util.Scanner;
 
 import src.jeu.gestions.UtilitaireJeu;
 import src.jeu.mode.*;
@@ -13,7 +12,6 @@ import src.jeu.mode.*;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         while(true) {
             System.out.println("=== Menu Principal ===");
             System.out.println("1. Jeu Classique");
@@ -21,17 +19,17 @@ public class Launcher {
             System.out.println("3. Wiki");
             System.out.println("4. Quitter");
             System.out.print("Choix : ");
-            int choix = UtilitaireJeu.saisieMenu(scanner, 1, 4);
+            int choix = UtilitaireJeu.saisieMenu(1, 4);
 
             if (choix == 1) {
                 Jeu.lancerJeu();
             } else if (choix == 2) {
                 JeuAlternatif.lancerJeuAlternatif();
             } else if(choix == 3) {
-                System.out.println("Wiki en construction...");
+                System.out.println("[Wiki] https://autobattler.gitbook.io/\n[Entrer] pour revenir au menu principal");
+                UtilitaireJeu.scanner.nextLine();
             }else {
-                scanner.close();
-                break; 
+                System.exit(0); 
             }
         }  
     }

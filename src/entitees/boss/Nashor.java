@@ -19,16 +19,16 @@ public class Nashor extends Combattant{
     
     /**
      * Les boss attaquent 4 fois
-     * @param ennemis que le mini-boss va attaquer
+     * @param ennemie que le mini-boss va attaquer
      */
     @Override
-    public void attaquer(Equipe ennemis) {
-        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+    public void attaquer(Equipe ennemie, Equipe alliee) {
+        Combattant adversaire = ennemie.choisirCombattantAleatoire();
         for(int i = 0; i < 4; i++) {
             adversaire.prendreDegat(this);
-            //Affichage de l'attaque effectuée
-            System.out.println(getNom() + "["+getId() + "] attaque " + adversaire.getNom()+"["+adversaire.getId()+"]" + " lui infligeant " + Math.max(0, getAttaque()-adversaire.getDefense()) + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
         }
+         //Affichage de l'attaque effectuée
+        System.out.println("🧌 [Boss]  " + getNom() + "[Equipe " + alliee.getID() + "] attaque 4 fois " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     @Override

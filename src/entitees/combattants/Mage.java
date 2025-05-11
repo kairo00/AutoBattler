@@ -24,11 +24,11 @@ public class Mage extends Combattant {
      * @param cible la personne que le mage va attaquer
      */
     @Override
-    public void attaquer(Equipe ennemis) {
-        Combattant adversaire = ennemis.choisirCombattantAleatoire();
-        System.out.println(adversaire.getPV());
+    public void attaquer(Equipe ennemie, Equipe alliee) {
+        Combattant adversaire = ennemie.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
-        System.out.println(adversaire.getNom()+" degat subit: "+getAttaque()+" pv: "+adversaire.getPV()+"/200");
+        System.out.println("🧙‍♂️ [Capacité spécial]"+getNom() +"[Equipe "+alliee.getID()+"] Jette un sort... "+ adversaire.getNom()+ "[Equipe "+ennemie.getID()+"] se retrouve sans défense durant l'attaque du "+getNom());
+        System.out.println("🗡️ " + getNom() + "[Equipe " + alliee.getID() + "] attaque " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
     }
 
     @Override

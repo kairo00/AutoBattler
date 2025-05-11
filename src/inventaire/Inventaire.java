@@ -135,7 +135,7 @@ public abstract class Inventaire {
         s += "|-------------|________|-------------| \n";
         s += "|                                    | \n";       
         for(Item i: inventaire.keySet()) {
-            s += "| Item : "+i+"\t Nombre : "+inventaire.get(i)+"          |\n";
+            s += "| Item : "+i.getNom()+"\t Nombre : "+inventaire.get(i)+"          |\n";
         }
         s+= "| Gold : "+getOr()+"                         |\n";
         s+= "+------------------------------------+";

@@ -1,7 +1,6 @@
 package src.jeu.gestions;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 import src.entitees.Combattant;
 import src.jeu.comparateurs.ComparatorVitesse;
@@ -48,7 +47,8 @@ public class Combat {
      * Les combattants jouent tour a tour tant qu'ils sont en vie, la manche s'arête lorsque tout les combattants ont joué ou qu'une des deux équipes n'a plus de combattants vivants.
      */
     private void lancerManche() {
-        System.out.println("Manche "+compteurManche);
+        System.out.println("\nManche "+compteurManche+"\n==========================================");
+        System.out.println("Déroulement du combat :\n");
 
             ArrayList<Combattant> attaquantTri = new ArrayList<>();
             for (Combattant c : equipe1.getEquipe()) {
@@ -65,16 +65,17 @@ public class Combat {
                 if (equipe1.aDesVivants() && equipe2.aDesVivants()) {
                     if (equipe1.getEquipe().contains(attaquant)) {
                         attaquant.action(equipe2, equipe1);
+                        System.out.println();
                     } else if (equipe2.getEquipe().contains(attaquant)) {
                         attaquant.action(equipe1, equipe2);
+                        System.out.println();
                     }
-                } else {
-                    break;
+                
                 }
             }
         System.out.println(resultatManche());
         System.out.println("[Entrer] pour continuer le combat.");
-        new Scanner(System.in).nextLine();
+        UtilitaireJeu.scanner.nextLine();
         compteurManche++;
     }
 
@@ -88,13 +89,13 @@ public class Combat {
         Collections.sort(equipe2.getEquipe(), new ComparatorVitesse());
         
         String str = "";
-        str += "======[Resulat de la manche "+ (compteurManche) + "]======\nEquipe 1:\n";
+        str += "\n======[Resulat de la manche "+ (compteurManche) + "]======\nEquipe 1:\n";
         for(Combattant c : equipe1.getEquipe()) {
-            str += c.toString()+" "+c.estEnVie()+"\n";
+            str += c.toString()+" Courage : "+Math.max(0, c.getCourage())+" | "+c.mortOuVivant()+" | Vitesse : "+c.getVitesse()+"\n";
         }
         str += "\nEquipe 2:\n";
         for(Combattant c : equipe2.getEquipe()) {
-            str += c.toString()+" "+c.estEnVie()+c.getVitesse()+"\n";
+            str += c.toString()+" Courage : "+ Math.max(0, c.getCourage())+" | "+c.mortOuVivant()+" | Vitesse : "+c.getVitesse()+"\n";
         }
         return str;
     }
@@ -106,17 +107,17 @@ public class Combat {
     public String ecranVictoire() {
         String str = "";
         if(equipe1.aDesVivants()) {
-            str += "======[Victoire de l'equipe 1]======\nSurvivant(s):\n";
+            str += "\n======[Victoire de l'equipe "+equipe1.getID()+"]======\nSurvivant(s):\n";
             for(Combattant c : equipe1.getEquipe()) {
                 if(c.estEnVie()) str += c.toString()+"\n";
             }
         } else if(equipe2.aDesVivants()) {
-            str += "======[Victoire de l'equipe 2]======\nSurvivant(s):\n";
+            str += "\n======[Victoire de l'equipe "+equipe1.getID()+"]======\nSurvivant(s):\n";
             for(Combattant c : equipe2.getEquipe()) {
                 if(c.estEnVie()) str += c.toString()+"\n";
             }
         } else {
-            str = "Egalité";
+            str = str += "\n======[Egalité]======\n";
         }
         return str;
     }

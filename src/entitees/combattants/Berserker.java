@@ -20,23 +20,24 @@ public class Berserker extends Combattant{
 
     /**
      * Le berserker attaque une fois de plus si ses pv son en dessous ou égaux à 80
-     * @param ennemis cible aléatoire choisie parmis les combattant
+     * @param ennemie cible aléatoire choisie parmis les combattant
      */
     @Override
-    public void attaquer(Equipe ennemis) {
+    public void attaquer(Equipe ennemie, Equipe alliee) {
         //Attaque un adversaire choisit aléatoirement
-        Combattant adversaire = ennemis.choisirCombattantAleatoire();
+        Combattant adversaire = ennemie.choisirCombattantAleatoire();
         adversaire.prendreDegat(this);
+        
         //Affichage des dégâts infligés ainsi que la vie de l'ennemi touché
-        System.out.println(getNom() + "["+getId() + "] attaque " + adversaire.getNom()+"["+adversaire.getId()+"]" + " lui infligeant " + Math.max(0, getAttaque()-adversaire.getDefense()) + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
+        System.out.println("🗡️  " + getNom() + "[Equipe " + alliee.getID() + "] attaque " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
         //Si les pv du berserker sont en dessous de 80 et qu'il est vivant il frappe a nouveau
-        if(getPV() <= 80 && estEnVie() && ennemis.aDesVivants()) {
+        if(getPV() <= 80 && estEnVie() && ennemie.aDesVivants()) {
             //nouvelle selection de l'adversaire a attaquer
-            adversaire = ennemis.choisirCombattantAleatoire();
+            adversaire = ennemie.choisirCombattantAleatoire();
             adversaire.prendreDegat(this);
             //Affichage de l'attaque suplémentaire
             System.out.println("Attaque suplémentaire du Berserker !");
-           System.out.println(getNom() + "["+getId() + "] attaque " + adversaire.getNom()+"["+adversaire.getId()+"]" + " lui infligeant " + Math.max(0, getAttaque()-adversaire.getDefense()) + " de dégats || pv: " + adversaire.getPV() + "/" + adversaire.getPvMax());
+            System.out.println("🗡️  " + getNom() + "[Equipe " + alliee.getID() + "] attaque " + adversaire.getNom() + "[Equipe " + ennemie.getID() + "] et lui inflige " + Math.max(0, getAttaque() - adversaire.getDefense()) + " dégât(s) || PV cible : " + adversaire.getPV() + "/" + adversaire.getPvMax());
         }
     }
 
