@@ -67,7 +67,7 @@ public class Equipe {
     public String toString() {
         String equipe = "=====[Vous êtes l'équipe "+this.id+"]=====\nVos combattants sont :\n";
         for(Combattant c : this.equipe) {
-            equipe += c.getNom()+": "+c.toString()+"\n";
+            equipe += c.getNom()+": "+c.toString()+"\t Courage: "+c.getCourage()+"/"+c.getCourageMax()+"\n";
         }
         return equipe;
     }
