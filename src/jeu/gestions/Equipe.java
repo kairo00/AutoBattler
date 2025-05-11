@@ -71,7 +71,7 @@ public class Equipe {
     public String toString() {
         String equipe = "";
         for(Combattant c : this.equipe) {
-            equipe += c.getNom()+" "+c.toString()+"\n";
+            equipe += c.getNom()+" "+c.toString()+" Courage : \n"+c.getCourage();
         }
         return equipe;
     }

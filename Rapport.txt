@@ -1,0 +1,363 @@
+Description des fonctionnalités
+
+
+    //Entitees
+
+    Class Combattants {
+
+        Combattant() -> Création du combattant
+
+        void cibleAdverse(equipe c) -> Choisis une cible aléatoire parmi les ennemis
+
+        void action(Equipe ennemie, Equipe alliée) -> La classe choisie l'action qu'il va réaliser (ex : attaque ou soigner)
+
+        void attaquer(Equipe ennemie) -> Permet au combattant d'attaquer une cible choisie
+
+        void prendreDegat(Combattant attaquant) -> Si le combattant subit des dégâts la méthode est appelée, il perd de la vie, du courage et peut éventuellement esquiver
+
+        int calculerDegat(Combattant cible) -> Calcul les dégâts que le combattant va infliger à sa cible
+
+        void regenererPV(int pv) -> Régénère les pv du combattant
+
+        void regenererCourage(int courage) -> régénère le courage du combattant
+
+        void soustraireCourage(int courage) -> réduis le courage du combattant
+
+        boolean activerEsquive() -> En fonction du tirage la fonction renvoie vrai si le combattant a esquivé sinon faux
+
+        boolean estEnVie() -> Renvoie vrai si le combattant est vivant sinon faux
+
+        String mortOuVivant() -> Renvoie une chaine de caractère en fonction de si le combattant est vivant, mort ou s'est enfui
+
+    }
+
+    Class dérivées de Combattant {
+    
+        Class Abomination {
+
+            @Override
+            void attaquer(Equipe ennemis) -> Plus le courage de l'abomination est faible plus il attaque (de 0 à -30, +1 attaque par -10 de courage)
+        }
+
+        Class Archer {
+
+            @Override
+            void attaquer(Equipe ennemis) -> L'archer attaque la cible avec le moins de pv
+        }
+
+        Class Berserker {
+            
+            @Override
+            void attaquer(Equipe ennemis) -> Si le berserker est en dessous d'un seuil il attaque à nouveau
+        }
+
+        Class Guerrier {
+            
+            @Override
+            void prendreDegat(Combattant cible) -> lorsque que le combattant prend des dégâts il peut contre-attaquer
+            }
+        }
+
+        Class Mage {
+
+            @Override 
+            int calculerDegat() -> permet au mage d'ignorer l'armure
+        }
+
+        Class Paladin {
+            
+            @Override
+            void attaquer(Equipe ennemis) -> permet au paladin de se soigner pendant son tour
+        }
+
+        Class Pretre {
+
+            void soin(Equipe cible) -> le prêtre peut soigner ses alliés
+
+            @Override
+            void action(Equipe ennemie, Equipe allié) -> Le prêtre choisi entre attaquer ou soigner
+        }
+
+        Class Voleur {
+
+            @Override
+            boolean activerEsquive() -> le voleur à 50% de chance d'esquiver
+        }
+    
+
+        //Boss
+
+        Class des boss {
+
+            Les boss ont des méthodes et attributs identitques
+
+            @Override
+            void attaquer(Equipe ennemis) -> Les boss attaquent 4 fois
+        }
+
+
+        //Mini-boss
+
+        Class des minis-boss {
+            
+            Les minis-boss ont des méthodes et attributs identitques
+            
+            @Override
+            void attaquer(Equipe ennemis) -> Les minis-boss attaquent 2 fois
+        }
+
+
+        //Mobs 
+
+        Class des mobs {
+            Les mobs ont simplements des stats qui varient entre eux
+        }
+    }
+
+
+    //Inventaire 
+
+    Class Inventaire {
+        
+        Inventaire() -> Création d'un Inventaire
+        
+        void starterKit() -> Donne a l'inventaire des ressources dès le début du jeu
+        
+        void utiliserItem(Item item, Equipe equipe) -> Permet d'utiliser des items
+        
+        boolean utiliserItemNom(String nom, Equipe equipe) -> Utilise un item en fonction de son nom
+        
+        void ajoutItem(Item item, int nombre) -> Permet d'aoujet des items à l'inventaire
+        
+        boolean supprimeItem(Item item, int nombre) -> Permet de supprimer un ou plusieurs items
+        
+        void ajoutOr(int nombre) -> Ajoute de l'or 
+        
+        void soustraireOr(int nombre) -> Reduis l'or
+        
+        String toString() -> Affiche l'inventaire
+
+    }
+
+    Class dérivées de Inventaire {
+        
+        Class InventaireJoueur {
+            
+            void venteJoueur(Item item, int nombre) -> Permet au joueur de vendre ses items
+
+            @Override
+            void starterKit() -> Donne au joueur des ressources lorsque qu'il lance la partie
+        }
+
+        Class IventaireMarchand {
+            void achatMarchand(Item item, int nombre, InventaireJoueur inventaireJoueur) -> permet d'acheter des items auprès du marchant
+            
+            void venteMarchand(Item item, int nombre, IventaireJoueur InventaireJoueur) -> permet de vendre ses items auprès du marchant
+            
+            void starterKit() -> Génère un magasin avec des ressources aléatoires }
+
+            String toString() -> Affichage de l'inventaire
+        }
+    }
+
+
+    //Items 
+
+    Class Item {
+        void effet(Equipe equipe) -> Donne aux items différents effets
+    }
+
+    Class dérivée de Item {
+        Bière {
+            Redonne 50 de courage à tous les Combattants
+        }
+
+        Potion {
+            Régènère tous les combattants de 50 pc 
+        }
+
+        PorteurdeCendre, These {
+            Affiche du texte
+        }
+    }
+
+    //Jeu
+
+    //Comparateurs
+
+    Class Comparator {
+        
+        ComparatorVie() {
+            Permet de comparer les la vie des combattants de façon décroissante
+        }
+        
+        ComparatorVitesse() {
+            Permet de comparer la vitesse des combattants de façon décroissante
+        }
+    }
+
+
+    //Gestion
+
+    Class Combat {
+        
+        Combat(Equipe equipe_1, Equipe equipe_2, Scanner scanner) -> Initialise le combat 
+        
+        void lancerCombat() -> Permet de lancer le combat 
+        
+        void lancerMache() -> Lance une manche
+        
+        String resultatManche() -> Affiche le resultat de la manche
+        
+        String ecranVictoire() -> Affiche l'écran de victoire 
+    }
+
+    Class Equipe {
+        Equipe() -> Créer une liste pour constituer l'équipe
+        
+        Combattant choisirCombattantAleatoire() -> Permet au combattant de choisir un combattant aléatoire
+        
+        Combattant choisirCombattantFaible() -> Permer au combattant de choisir l'ennemi avec le moins de pv 
+        
+        boolean aDesVivants() -> Permet de savoir si toute l'équipe est morte ou non
+    }
+
+    Class GenCombattant {
+        
+        Combattant generer(int choix) -> Génère un combattant en fonction du nombre en paramètre
+        
+        Combattant genererParNom(String nom) -> Génère un combattant en fonction de nom
+        
+        void afficherMenuAlt() -> Affiche les combattants qui peuvent potentiellements être générés
+    }
+
+    Class GestionEvenement {
+
+        GestionEvenement(Scanner scanner, Equipe equipe, InventaireJoueur inventaire) -> Permet de gérer les evenements que le joueur va rencontrer
+
+        void genereMobs(Equipe groupe) -> Génère un groupe aléatoire de monstre e fonction d'un tirage
+
+        void genererMiniBoss(Equipe boss) -> Génère un mini-boss aléatoire en fonction du tirage
+
+        void genererBoss(Equipe boss) -> Génère un boss en fonction du tirage 
+
+        void repos() -> En fonction de son choix le joueur peut soit régénérer sa vie ou son courage 
+
+        void eventMarchand() -> Gère les interactions ainsi que les dialogues avec le marchant 
+
+        void tableDeButin() -> Gère le taux de drop des items 
+
+        vois prochainEvent() -> Definis le prochain événement que le joueur va rencontrer aléatoirement ou en fonction de la manche pour les boss/minis-boss 
+
+        void arreterJeu() -> Permet d'arreter la partie 
+
+        void ajoutOr() -> s'utilise en fin de combat pour déterminer combien d'or le joueur a obtenu ainsi que les items potentiellements drop 
+
+    }
+
+    UtilitaireJeu {
+        Gère la saisie du joueur dans les menus
+    }
+
+
+    //mode
+
+    Jeu {
+        void choixCombattantTest(Equipe equipe, Scanner scanner) -> Demande au joueur les combattants qu'il veut ajouter dans son equipe pour le mode test 
+        
+        void choixCombattantPvp(Equipe equipe, Scanner scanner) -> Propose des combattants à ajouter pour son équipe dans le mode pvp 
+        
+        void choixCombattantOrdi(Equipe equipe) -> Equipe généré aléatoirement pour l'ordinateur 
+
+        boolean demanderQuitter(Scanner scanner) -> Permet de quitter le jeu 
+
+        void lancerJeu() -> Lance/ferme le menu du jeu et démarre le mode de jeu selectionné  
+
+    }
+
+    Jeu Alternatif {
+        void choixCombattant(Equipe equipe, Scanner scanner) -> Le joueur choisit ses combattants (4 max)
+
+        void boucleDeJeu(Scanner scanner, Equipe equipe, Inventaire joueur inventaire) -> Entre chaque round le joueur choisit la prochaine action qu'il veut effectuer dans le menu
+
+        void lancerJeuAlternatif() -> Permet de lancer le mode de jeu alternatif 
+    
+    }
+
+    Launcher {
+        Le joueur choisit si il veut joué à la version originale du jeu, accéder au wiki ou a l'extension
+    }
+
+
+Explication global du fonctionnement 
+
+    Le joueur execute le launcher et sélectionne la version du jeu à laquelle il veut jouer."
+
+    1. Lancement du jeu original 
+
+        Le joueur choisit entre 3 modes de jeu :
+
+            1. Mode test
+                Le joueur choisit la composition des deux équipes, les équipes s'affrontent et le vainqueur est affiché à la fin .
+
+            2. Mode PVP
+                Les joueurs constituent chacun à leur tour une équipe. À chaque tour, le joueur qui choisit sélectionne parmi 3 personnages le combattant qu'il veut ajouter à son équipe (5 fois par joueur). 
+                Le combat se lance et le vainqueur est affiché à la fin.
+
+            3. Mode PVE
+
+                Le joueur constitue son équipe de la même manière qu'en pvp, l'équipe adverse est déterminé aléatoirement .
+                Le combat se lance et le vainqueur est affiché à la fin. 
+
+
+    2. Lancement du jeu alternatif 
+
+        Le mode de jeu s'inspire d'un dungeon crawler, le joueur doit aller le plus loin possible tout en gérant la vie de ses personnages ainsi que leur jauge de courage
+
+        Au lancement du jeu, le joueur selectionne 4 combattants à ajouter à son équipe
+        Le joueur doit ensuite choirsi ce qu'il veut faire :
+
+            1. Prochain event :
+                Lance un evenement aléatoire :
+                    - 7 chance sur 10 de se retrouver dans un combat
+                        Le combat est généré aleatoirement, le groupe ennemi peut avoir entre 3 et 6 monstres
+
+                    - 2 chance sur 10 de rencontrer un marchand
+                        Le joueur peut acheter ou vendre des consommables auprès du achatMarchand
+                        Les items ont une moins bonne valeur lorsqu'ils sont vendus par le joueur
+
+                    - 1 chance sur 10 de trouver une zone de repos
+                        Le joueur choisit entre régénerer le courage ou la vie de son équipe
+
+                    - Toutes les 5 manches un mini-boss apparait
+
+                    - Toutes les 10 manches un bossa apparait
+
+            2. Inventaire :
+                Ici le joueur peut consulter son inventaire et utiliser ses consommables, les items importants sont les potions et bières 
+                    - Potion : régénère la vie de toute l'équipe de 50
+                    - Biere : régénère le courage de toute l'equipe 50
+                
+
+            3. Consulte l'equipe :
+                Permet de visualiser l'équipe actuelle
+
+            4.Quitter : 
+                Quitte le jeu
+    
+    3. Wiki 
+        Ouverture du wiki (vide)
+
+    4. Quitter 
+        Quitte le launcher
+        
+
+    
+
+
+
+
+        
+
+
+
