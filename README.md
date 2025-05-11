@@ -9,5 +9,5 @@ AutoBattler est un jeu qui se joue dans le terminal réalisé à l'occasion d'un
 
 
 ---
-
-📄 [Voir la documentation du projet](https://hvgo.me/poo/doc-autoBattler/index.html)
+🧭 [Voir le wiki](https://autobattler.gitbook.io)
+📄 [Voir la documentation du projet](https://hvgo.me/poo/doc)
