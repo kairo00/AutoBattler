@@ -33,5 +33,23 @@ public class UtilitaireJeu {
         return choix;
     }
 
+    /**
+     * Permet de vérifier si l'utilisateur a bien saisi un entier.
+     * @return un entier saisi par l'utilisateur
+     */
+    public static int saisirInt() {
+        int choix = -1;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                choix = scanner.nextInt();
+                scanner.nextLine();
+                return choix;
+            } else {
+                scanner.nextLine();
+                System.out.println("Erreur: Seul les nombres entiers sont autorisés.");
+            }
+        }
+    }
+
 
 }

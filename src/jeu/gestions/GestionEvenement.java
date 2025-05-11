@@ -116,7 +116,7 @@ public class GestionEvenement {
         System.out.println("Votre groupe a trouvé une zone de repos !");
         System.out.println("1. Se reposer et se soigner");
         System.out.println("2. Se raconter des histoires et regagner du courage");
-        int choix = UtilitaireJeu.scanner.nextInt();
+        int choix = UtilitaireJeu.saisirInt();
         switch(choix) {
             case 1 -> {
                 for(Combattant i : equipe.getEquipe()) {
@@ -186,8 +186,7 @@ public class GestionEvenement {
                     String choix1 = UtilitaireJeu.scanner.nextLine();
                      //Le joueur tape le nombre d'item qu'il veut obtenir
                     System.out.print("Marchand : Tres bien mon ami ! Combien en veux-tu ? ");
-                    int choixNombre = UtilitaireJeu.scanner.nextInt();
-                    UtilitaireJeu.scanner.nextLine();
+                    int choixNombre = UtilitaireJeu.saisirInt();
                     // En fonction de son choix, un dialogue apparaît et le joueur obtient le nombre d'items demandé
                     switch(choix1.toLowerCase()) {
                         case "potion" -> {
@@ -225,8 +224,7 @@ public class GestionEvenement {
                     String choix3 = UtilitaireJeu.scanner.nextLine();
                     //le joueur tape le nombre d'item à vendre
                     System.out.println("- Combien peux tu m'en fournir ? ");
-                    int choixNombre = UtilitaireJeu.scanner.nextInt();
-                    UtilitaireJeu.scanner.nextLine();
+                    int choixNombre = UtilitaireJeu.saisirInt();
                     //Vend l'item choisi
                     switch(choix3.toLowerCase()) {
                         case "potion" -> { 

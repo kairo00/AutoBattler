@@ -32,8 +32,7 @@ public class Jeu {
             
             for (int i = 0; i < combattants.size(); i++) {
                 System.out.println("Nombre de " + combattants.get(i) + " :");
-                nbCombattant = UtilitaireJeu.scanner.nextInt();
-                UtilitaireJeu.scanner.nextLine();
+                nbCombattant = UtilitaireJeu.saisirInt();
 
                 for (int j = 0; j < nbCombattant; j++) {
                     Combattant c = GenCombattant.genererParNom(combattants.get(i));
